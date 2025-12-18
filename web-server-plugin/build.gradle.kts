@@ -35,3 +35,7 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
+tasks.withType<Jar> {
+    archiveBaseName = "9craft-web-server"
+}

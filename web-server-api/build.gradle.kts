@@ -29,3 +29,7 @@ java {
     withJavadocJar()
     withSourcesJar()
 }
+
+tasks.withType<Jar> {
+    archiveBaseName = "9craft-web-server-api"
+}

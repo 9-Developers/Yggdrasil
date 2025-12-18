@@ -14,7 +14,7 @@ slf4j = "2.0.17"
 grizzly-http-server = { module = "org.glassfish.grizzly:grizzly-http-server", version.ref = "grizzly" }
 jackson-bom = { module = "tools.jackson:jackson-bom", version.ref = "jackson" }
 jackson-core = { module = "tools.jackson.core:jackson-core" }
-jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind" }
+jackson-databind = { module = "tools.jackson.core:jackson-databind" }
 jakarta = { module = "jakarta.ws.rs:jakarta.ws.rs-api", version.ref = "jakarta" }
 jakarta-json = { module = "jakarta.json:jakarta.json-api", version.ref = "jakarta-json" }
 jersey-grizzly-server = { module = "org.glassfish.jersey.containers:jersey-container-grizzly2-http", version.ref = "jersey" }
