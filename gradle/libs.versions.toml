@@ -8,6 +8,7 @@ jersey = "4.0.0"
 jspecify = "1.0.0"
 junit = "6.0.1"
 paper = "1.21.11-rc3-R0.1-SNAPSHOT"
+slf4j = "2.0.17"
 
 [libraries]
 grizzly-http-server = { module = "org.glassfish.grizzly:grizzly-http-server", version.ref = "grizzly" }
@@ -24,6 +25,7 @@ junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
 [bundles]
 jackson = ["jackson-core", "jackson-databind"]
