@@ -1,5 +1,4 @@
 plugins {
-    checkstyle
     `java-library`
 
     alias(libs.plugins.axion)
@@ -7,7 +6,7 @@ plugins {
 
 scmVersion {
     tag {
-        prefix = ""
+        prefix = "plugin-"
     }
 }
 

@@ -1,5 +1,10 @@
+/**
+ * 9craft Web Server plugin.
+ */
 module tech.ninedev.server {
     requires com.fasterxml.jackson.databind;
+    requires jakarta.ws.rs;
+    requires java.logging;
     requires org.bukkit;
     requires org.glassfish.grizzly.http.server;
     requires org.glassfish.jersey.container.grizzly2.http;
@@ -7,5 +12,7 @@ module tech.ninedev.server {
     requires org.glassfish.jersey.media.json.jackson;
     requires org.jspecify;
     requires org.slf4j;
-    requires tech.nine_dev.server.api;
+    requires tech.ninedev.server.api;
+
+    exports tech.ninedev.server;
 }
