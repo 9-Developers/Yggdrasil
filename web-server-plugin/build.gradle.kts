@@ -38,4 +38,10 @@ java {
 
 tasks.withType<Jar> {
     archiveBaseName = "9craft-web-server"
+
+    from(
+        configurations.runtimeClasspath.get()
+        .filter { it.name.startsWith("9craft-web-server-api") }
+        .map { zipTree(it) }
+    )
 }
