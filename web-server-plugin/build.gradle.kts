@@ -3,7 +3,6 @@ plugins {
     `java-library`
 
     alias(libs.plugins.axion)
-    alias(libs.plugins.library.conventions)
 }
 
 scmVersion {
@@ -12,8 +11,7 @@ scmVersion {
     }
 }
 
-group = "tech.9dev"
-version = "1.0.0-SNAPSHOT"
+version = scmVersion.version
 description = "PaperMC plugin for hosting a web server"
 
 dependencies {
@@ -31,4 +29,10 @@ dependencies {
     testImplementation(libs.junit.jupiter)
 
     testRuntimeOnly(libs.junit.platform.launcher)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }

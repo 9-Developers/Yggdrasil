@@ -32,4 +32,3 @@ jersey = ["jersey-grizzly-server", "jersey-json", "jersey-server"]
 
 [plugins]
 axion = { id = "pl.allegro.tech.build.axion-release", version.ref = "axion" }
-library-conventions = { id = "buildlogic.java-library-conventions" }
