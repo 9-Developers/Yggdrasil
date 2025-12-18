@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="fileExtensions" value="java, properties, xml"/>
+
+    <!-- Excludes all 'module-info.java' files              -->
+    <!-- See https://checkstyle.org/filefilters/index.html -->
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="module\-info\.java$"/>
+    </module>
+
+    <module name="SuppressionFilter">
+        <property name="file" value="${config_loc}/suppressions.xml"/>
+    </module>
+
+    <!-- Checks for whitespace                               -->
+    <!-- See http://checkstyle.org/checks/whitespace/index.html -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <module name="LineLength">
+        <property name="fileExtensions" value="java"/>
+        <property name="max" value="120"/>
+        <property name="ignorePattern"
+                  value="^package.*|^import.*|href\s*=\s*&quot;[^&quot;]*&quot;|http://|https://|ftp://"/>
+    </module>
+    <module name="NewlineAtEndOfFile"/>
+
+    <module name="JavadocPackage">
+        <property name="id" value="MainSource"/>
+    </module>
+
+    <module name="TreeWalker">
+        <!-- https://checkstyle.org/checks/annotation/index.html -->
+        <module name="AnnotationLocation"/>
+        <module name="AnnotationUseStyle"/>
+        <module name="MissingOverride"/>
+
+        <!-- https://checkstyle.org/checks/blocks/index.html -->
+        <module name="EmptyBlock"/>
+        <module name="EmptyCatchBlock"/>
+        <module name="LeftCurly"/>
+        <module name="NeedBraces"/>
+        <module name="RightCurly"/>
+
+        <!-- https://checkstyle.org/checks/design/index.html -->
+        <module name="HideUtilityClassConstructor"/>
+        <module name="InnerTypeLast"/>
+        <module name="MutableException"/>
+        <module name="OneTopLevelClass"/>
+        <module name="SealedShouldHavePermitsList"/>
+
+        <!-- https://checkstyle.org/checks/coding/index.html -->
+        <module name="AvoidNoArgumentSuperConstructorCall"/>
+        <module name="ConstructorsDeclarationGrouping"/>
+        <module name="DeclarationOrder"/>
+        <module name="DefaultComesLast"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsAvoidNull"/>
+        <module name="EqualsHashCode"/>
+        <module name="FinalLocalVariable"/>
+        <module name="IllegalThrows"/>
+        <module name="IllegalType"/>
+        <module name="InnerAssignment"/>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="NoFinalizer"/>
+        <module name="OneStatementPerLine"/>
+        <module name="PackageDeclaration"/>
+        <module name="ParameterAssignment"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StringLiteralEquality"/>
+        <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
+        <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+        <module name="UnnecessarySemicolonInEnumeration"/>
+        <module name="UnnecessarySemicolonInTryWithResources"/>
+        <module name="UnusedLocalVariable"/>
+        <module name="WhenShouldBeUsed"/>
+
+        <!-- https://checkstyle.org/checks/imports/index.html -->
+        <module name="AvoidStarImport"/>
+        <module name="CustomImportOrder">
+            <property name="customImportOrderRules" value="SAME_PACKAGE(3), STANDARD_JAVA_PACKAGE, THIRD_PARTY_PACKAGE, STATIC"/>
+            <property name="separateLineBetweenGroups" value="true"/>
+            <property name="sortImportsInGroupAlphabetically" value="true"/>
+        </module>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- https://checkstyle.org/checks/javadoc/index.html -->
+        <module name="AtclauseOrder">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="InvalidJavadocPosition">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocContentLocation">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocLeadingAsteriskAlign">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocMethod">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocMissingLeadingAsterisk">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocMissingWhitespaceAfterAsterisk">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocParagraph">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocStyle">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocTagContinuationIndentation">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocType">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="JavadocVariable">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="MissingJavadocMethod">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="MissingJavadocPackage">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="MissingJavadocType">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="NonEmptyAtclauseDescription">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="RequireEmptyLineBeforeBlockTagGroup">
+            <property name="id" value="MainSource"/>
+        </module>
+
+        <!-- https://checkstyle.org/checks/misc/index.html -->
+        <module name="ArrayTypeStyle"/>
+        <module name="CommentsIndentation"/>
+        <module name="FinalParameters"/>
+        <module name="Indentation"/>
+        <module name="OuterTypeFilename"/>
+        <module name="UpperEll"/>
+
+        <!-- https://checkstyle.org/checks/modifier/index.html -->
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+
+        <!-- https://checkstyle.org/checks/naming/index.html -->
+        <module name="CatchParameterName"/>
+        <module name="ClassTypeParameterName"/>
+        <module name="ConstantName">
+            <property name="format" value="^log$|^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
+        </module>
+        <module name="IllegalIdentifierName"/>
+        <module name="InterfaceTypeParameterName"/>
+        <module name="LambdaParameterName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName">
+            <property name="id" value="MainSource"/>
+        </module>
+        <module name="MethodTypeParameterName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="PatternVariableName"/>
+        <module name="RecordComponentName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+
+        <!-- https://checkstyle.org/checks/sizes/index.html -->
+        <module name="OuterTypeNumber"/>
+
+        <!-- https://checkstyle.org/checks/whitespace/index.html -->
+        <module name="EmptyForInitializerPad"/>
+        <module name="EmptyForIteratorPad"/>
+        <module name="GenericWhitespace"/>
+        <module name="MethodParamPad"/>
+        <module name="NoLineWrap"/>
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="AT, INC, DEC, UNARY_MINUS, UNARY_PLUS, BNOT, LNOT, DOT, ARRAY_DECLARATOR, INDEX_OP"/>
+        </module>
+        <module name="NoWhitespaceBefore"/>
+        <module name="NoWhitespaceBeforeCaseDefaultColon"/>
+        <module name="OperatorWrap"/>
+        <module name="ParenPad"/>
+        <module name="SeparatorWrap">
+            <property name="tokens" value="METHOD_REF"/>
+            <property name="option" value="nl"/>
+        </module>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+
+    </module>
+
+</module>

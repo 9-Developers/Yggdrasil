@@ -1,0 +1,34 @@
+plugins {
+    checkstyle
+    `java-library`
+
+    alias(libs.plugins.axion)
+    alias(libs.plugins.library.conventions)
+}
+
+scmVersion {
+    tag {
+        prefix = ""
+    }
+}
+
+group = "tech.9dev"
+version = "1.0.0-SNAPSHOT"
+description = "PaperMC plugin for hosting a web server"
+
+dependencies {
+    compileOnly(libs.paper.api)
+    compileOnly(project(":web-server-api"))
+
+    implementation(libs.grizzly.http.server)
+    implementation(platform(libs.jackson.bom))
+    implementation(libs.bundles.jackson)
+    implementation(libs.bundles.jakarta)
+    implementation(libs.bundles.jersey)
+    implementation(libs.jspecify)
+
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+
+    testRuntimeOnly(libs.junit.platform.launcher)
+}

@@ -1,0 +1,16 @@
+include:
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+
+stages:
+  - test
+  - build
+
+build:
+  image: eclipse-temurin:21
+
+  script:
+    - ./gradlew build
+
+  stage: build
