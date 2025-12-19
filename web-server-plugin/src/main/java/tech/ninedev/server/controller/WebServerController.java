@@ -1,5 +1,6 @@
 package tech.ninedev.server.controller;
 
+import tech.ninedev.server.WebServerPlugin;
 import tech.ninedev.server.api.Message;
 import tech.ninedev.server.api.Resource;
 import tech.ninedev.server.api.Status;
@@ -11,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -24,9 +28,10 @@ import org.slf4j.Logger;
  *
  * @since 1.0.0
  */
-@Path("/status")
+@Path("/webserver")
 @Produces(MediaType.APPLICATION_JSON)
-public class StatusController {
+@Singleton
+public class WebServerController {
     /** Plugin logger. */
     @NonNull
     private final Logger log;
@@ -40,7 +45,10 @@ public class StatusController {
      * @param log       Plugin logger.
      * @param resources Registered resources.
      */
-    public StatusController(@NonNull final Logger log, @NonNull final Map<String, Resource> resources) {
+    @Inject
+    public WebServerController(
+            @NonNull @Named(WebServerPlugin.PLUGIN_LOGGER_NAME) final Logger log,
+            @NonNull @Named(WebServerPlugin.PLUGIN_RESOURCES_NAME) final Map<String, Resource> resources) {
         this.log = log;
         this.resources = resources;
     }

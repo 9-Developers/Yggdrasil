@@ -38,10 +38,7 @@ java {
 
 tasks.withType<Jar> {
     archiveBaseName = "9craft-web-server"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    from(
-        configurations.runtimeClasspath.get()
-        .filter { it.name.startsWith("9craft-web-server-api") }
-        .map { zipTree(it) }
-    )
+    from(project(":web-server-api").sourceSets.main.get().output)
 }

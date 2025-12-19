@@ -1,8 +1,7 @@
 package tech.ninedev.server.api;
 
-import java.util.logging.Level;
-
 import org.jspecify.annotations.NonNull;
+import org.slf4j.event.Level;
 
 /**
  * Message from a resource.

@@ -6,6 +6,8 @@ module tech.ninedev.server.api {
     requires java.logging;
     requires org.glassfish.grizzly.http.server;
     requires org.jspecify;
+    requires jakarta.validation;
+    requires org.slf4j;
 
     exports tech.ninedev.server.api;
 }

@@ -1,5 +1,6 @@
 package tech.ninedev.server.api;
 
+import jakarta.validation.constraints.NotBlank;
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.jspecify.annotations.NonNull;
 
@@ -39,5 +40,5 @@ public interface WebServer {
      * @param name     Resource name.
      * @param resource Resource.
      */
-    void registerResource(@NonNull String name, @NonNull Resource resource);
+    void registerResource(@NotBlank String name, @NonNull Resource resource);
 }

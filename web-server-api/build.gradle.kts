@@ -18,6 +18,7 @@ dependencies {
 
     implementation(libs.grizzly.http.server)
     implementation(libs.jakarta)
+    implementation(libs.jakarta.validations.api)
     implementation(libs.slf4j.api)
 }
 
