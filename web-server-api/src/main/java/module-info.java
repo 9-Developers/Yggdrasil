@@ -2,11 +2,13 @@
  * 9craft Web Server API.
  */
 module tech.ninedev.server.api {
+    requires jakarta.validation;
     requires jakarta.ws.rs;
     requires java.logging;
+    requires org.bukkit;
     requires org.glassfish.grizzly.http.server;
+    requires org.glassfish.jersey.inject.hk2;
     requires org.jspecify;
-    requires jakarta.validation;
     requires org.slf4j;
 
     exports tech.ninedev.server.api;

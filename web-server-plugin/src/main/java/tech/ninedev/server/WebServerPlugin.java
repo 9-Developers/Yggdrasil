@@ -1,14 +1,17 @@
 package tech.ninedev.server;
 
-import tech.ninedev.server.api.Message;
 import tech.ninedev.server.api.Resource;
 import tech.ninedev.server.api.Status;
 import tech.ninedev.server.api.StatusCode;
 import tech.ninedev.server.api.WebServer;
+import tech.ninedev.server.binder.WebServerBinder;
+import tech.ninedev.server.controller.CorsFilter;
 import tech.ninedev.server.controller.WebServerController;
+import tech.ninedev.server.model.RegisteredPlugin;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,17 +20,17 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import jakarta.validation.constraints.NotBlank;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.inject.hk2.AbstractBinder;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
-import org.slf4j.event.Level;
 
 /**
  * PaperMC (Bukkit) plugin.
@@ -35,33 +38,41 @@ import org.slf4j.event.Level;
  * @since 1.0.0
  */
 public class WebServerPlugin extends JavaPlugin implements Resource, WebServer {
-    /** Plugin logger injection name. */
-    public static final String PLUGIN_LOGGER_NAME = "9craft Web Server Logger";
-    /** Plugin resources injection name. */
-    public static final String PLUGIN_RESOURCES_NAME = "9craft Web Server Resources";
+    /** Host configuration key. */
+    private static final String KEY_HOST = "host";
+    /** Port configuration key. */
+    private static final String KEY_PORT = "port";
+    /** Scheme configuration key. */
+    private static final String KEY_SCHEME = "scheme";
+    /** API path. */
+    private static final String PATH_API = "/api";
+    /** Restricted path mappings. */
+    private static final List<String> RESTRICTED_MAPPINGS = List.of("/", "/admin", "/api", "/webserver");
 
-    /** Server base URI. */
-    private static final String BASE_URI = "https://127.0.0.1:9999/api";
-
-    /** Grizzly HTTP server. */
+    /** Plugin status error messages. */
     @NonNull
-    private final HttpServer httpServer;
+    private final List<String> errorMessages;
+    /** Plugin status info messages. */
+    @NonNull
+    private final List<String> infoMessages;
     /** Plugin logger. */
     @NonNull
     private final Logger log;
-    /** Plugin messages. */
+    /** Registered plugins. */
     @NonNull
-    private final List<Message> messages;
-    /** Registered resources. */
-    @NonNull
-    private final Map<String, Resource> resources;
+    private final Map<String, RegisteredPlugin> registeredPlugins;
     /** Grizzly resource configuration. */
     @NonNull
     private final ResourceConfig resourceConfig;
 
-    /** Plugin status. */
+    /** Grizzly HTTP server. */
+    private HttpServer httpServer;
+    /** Plugin status message. */
     @NonNull
-    private Status status;
+    private String message;
+    /** Plugin status code. */
+    @NonNull
+    private StatusCode statusCode;
 
     /**
      * Constructor.
@@ -70,51 +81,25 @@ public class WebServerPlugin extends JavaPlugin implements Resource, WebServer {
         final JacksonJaxbJsonProvider jsonProvider = new JacksonJaxbJsonProvider();
         jsonProvider.setMapper(new JsonMapper());
 
+        errorMessages = new ArrayList<>();
+        infoMessages = new ArrayList<>();
         log = getSLF4JLogger();
-        messages = new ArrayList<>();
-        resources = new HashMap<>();
-        resourceConfig = new ResourceConfig()
-                .register(jsonProvider)
-                .register(new AbstractBinder() {
-                    @Override
-                    protected void configure() {
-                        bind(log).to(Logger.class).named(PLUGIN_LOGGER_NAME);
-                        bind(resources)
-                                .to(new TypeLiteral<Map<String, Resource>>() { }.getType())
-                                .named(PLUGIN_RESOURCES_NAME);
-                    }
-                })
-                .register(WebServerController.class);
-        httpServer = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), resourceConfig);
-        status = new Status(
-                StatusCode.OK,
-                "Uninitialized",
-                Collections.emptyList(),
-                Collections.emptyList(),
-                Collections.emptyList());
+        message = "Initialized";
+        registeredPlugins = new HashMap<>();
+        resourceConfig = new ResourceConfig().register(jsonProvider);
+        statusCode = StatusCode.OK;
 
-        messages.add(new Message(Level.INFO, "Initialized 9craft Web Server plugin"));
-        registerResource("9craft Web Server", this);
-    }
-
-    @NonNull
-    @Override
-    public List<Message> messages() {
-        log.trace("Getting messages");
-
-        return Collections.unmodifiableList(messages);
+        registerBinder(this, new WebServerBinder(log, registeredPlugins));
+        registerController(this, WebServerController.class);
+        registerController(this, CorsFilter.class);
+        registerResource(this, "9craft Web Server", this);
     }
 
     @Override
     public void onDisable() {
         log.trace("Disabling {}", getName());
-        messages.add(new Message(Level.INFO, "Disabling 9craft Web Server plugin"));
-        status = new Status(
-                StatusCode.OK,
-                "Stopped",
-                Collections.emptyList(),
-                Collections.emptyList(),
-                Collections.emptyList());
+        statusCode = StatusCode.OK;
+        message = "Stopped";
 
         httpServer.shutdownNow();
     }
@@ -122,51 +107,85 @@ public class WebServerPlugin extends JavaPlugin implements Resource, WebServer {
     @Override
     public void onEnable() {
         log.trace("Enabling {}", getName());
-        messages.add(new Message(Level.INFO, "Enabling 9craft Web Server plugin"));
+
+        saveDefaultConfig();
 
         try {
+            httpServer = GrizzlyHttpServerFactory.createHttpServer(
+                new URI(
+                    getConfig().getString(KEY_SCHEME),
+                    null,
+                    getConfig().getString(KEY_HOST),
+                    getConfig().getInt(KEY_PORT),
+                    PATH_API,
+                    null,
+                    null),
+                resourceConfig);
+
             httpServer.start();
 
-            status = new Status(
-                    StatusCode.OK,
-                    "Running",
-                    Collections.emptyList(),
-                    Collections.emptyList(),
-                    Collections.emptyList());
-        } catch (final IOException e) {
-            status = new Status(
-                    StatusCode.ERROR,
-                    "Failed to start HTTP server",
-                    List.of(e.getMessage()),
-                    Collections.emptyList(),
-                    Collections.emptyList());
+            statusCode = StatusCode.OK;
+            message = "Running";
+            infoMessages.add("Plugin enabled");
+        } catch (final IOException | URISyntaxException e) {
+            statusCode = StatusCode.ERROR;
+            message = "Failed to start HTTP server";
+            errorMessages.add(e.getMessage());
 
             throw new RuntimeException("Failed to start web server", e);
         }
     }
 
     @Override
-    public void registerController(@NonNull final Object controller) {
-        log.trace("Registering controller {}", controller.getClass().getName());
-        messages.add(new Message(Level.INFO, "Registering REST controller: " + controller.getClass().getName()));
+    public <T extends AbstractBinder> void registerBinder(@NonNull final Plugin plugin, @NonNull final T binder) {
+        log.trace("Registering binder {}", binder.getClass().getName());
+
+        resourceConfig.register(binder);
+    }
+
+    @Override
+    public void registerController(@NonNull final Plugin plugin, @NonNull final Class<?> controller) {
+        log.trace("Registering controller {}", List.of(controller.getTypeParameters()));
 
         resourceConfig.register(controller);
     }
 
     @Override
-    public void registerHttpHandler(@NonNull final HttpHandler handler, @NonNull final String... mappings) {
+    public boolean registerHttpHandler(
+        @NonNull final Plugin plugin,
+        @NonNull final HttpHandler handler,
+        @NonNull final String... mappings) {
         log.trace("Registering handler with mappings {}", (Object[]) mappings);
-        messages.add(new Message(Level.INFO, "Registering HTTP handler(s): " + String.join(", ", mappings)));
 
+        if (!areMappingsValid(plugin, mappings)) {
+            return false;
+        }
+
+        final List<String> paths = getPlugin(plugin.getName()).paths();
+
+        paths.addAll(List.of(mappings));
+        Collections.sort(paths);
         httpServer.getServerConfiguration().addHttpHandler(handler, mappings);
+
+        return true;
     }
 
     @Override
-    public void registerResource(@NotBlank final String name, @NonNull final Resource resource) {
+    public boolean registerResource(
+        @NonNull final Plugin plugin,
+        @NotBlank final String name,
+        @NonNull final Resource resource) {
         log.trace("Registering resource {}", name);
-        messages.add(new Message(Level.INFO, "Registering resource \"" + name + "\""));
 
-        resources.put(name, resource);
+        final RegisteredPlugin registeredPlugin = getPlugin(plugin.getName());
+
+        if (registeredPlugin.resources().containsKey(name)) {
+            return false;
+        } else {
+            registeredPlugin.resources().put(name, resource);
+
+            return true;
+        }
     }
 
     @NonNull
@@ -174,6 +193,87 @@ public class WebServerPlugin extends JavaPlugin implements Resource, WebServer {
     public Status status() {
         log.trace("Getting status");
 
-        return status;
+        return new Status(
+            statusCode,
+            message,
+            Collections.unmodifiableList(errorMessages),
+            Collections.emptyList(),
+            Collections.unmodifiableList(infoMessages));
+    }
+
+    @Nullable
+    @Override
+    public Resource unregisterResource(@NonNull final Plugin plugin, @NotBlank final String name) {
+        log.trace("Unregistering resource {}", name);
+
+        if (registeredPlugins.containsKey(plugin.getName())) {
+            return registeredPlugins.get(plugin.getName()).resources().remove(name);
+        } else {
+            return null;
+        }
+    }
+
+    /* ***************************************** Private utility methods ***************************************** */
+
+    /**
+     * Check if HTTP path mappings are valid.
+     *
+     * @param plugin   Plugin registering the mappings.
+     * @param mappings Mappings to check.
+     * @return {@code true} if mappings are valid, {@code false} otherwise.
+     */
+    private boolean areMappingsValid(@NonNull final Plugin plugin, @NonNull final String... mappings) {
+        final List<String> restrictedMappings = new ArrayList<>();
+        // This is a terrible algorithm, but so few mappings should be registered that it doesn't really matter
+        final List<String> registeredMappings = new ArrayList<>();
+
+        for (final String mapping : mappings) {
+            for (final String restrictedMapping : RESTRICTED_MAPPINGS) {
+                if (mapping.equalsIgnoreCase(restrictedMapping)) {
+                    restrictedMappings.add(mapping);
+                }
+            }
+
+            final boolean isAlreadyMapped = registeredPlugins.values()
+                .stream()
+                .map(RegisteredPlugin::paths)
+                .flatMap(List::stream)
+                .anyMatch(mapping::equalsIgnoreCase);
+
+            if (isAlreadyMapped) {
+                registeredMappings.add(mapping);
+            }
+        }
+
+        if (!restrictedMappings.isEmpty()) {
+            log.warn("Plugin {} attempted to map restricted paths: {}", plugin.getName(), restrictedMappings);
+
+            return false;
+        } else if (!registeredMappings.isEmpty()) {
+            log.warn("Plugin {} attempted to map already registered paths: {}", plugin.getName(), registeredMappings);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get registered plugin.
+     *
+     * @param plugin Plugin name.
+     * @return Registered plugin.
+     */
+    @NonNull
+    private RegisteredPlugin getPlugin(@NonNull final String plugin) {
+        if (!registeredPlugins.containsKey(plugin)) {
+            final RegisteredPlugin registeredPlugin = new RegisteredPlugin(new ArrayList<>(), new HashMap<>());
+
+            registeredPlugins.put(plugin, registeredPlugin);
+
+            return registeredPlugin;
+        } else {
+            return registeredPlugins.get(plugin);
+        }
     }
 }

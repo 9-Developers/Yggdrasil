@@ -15,7 +15,7 @@ import org.jspecify.annotations.NonNull;
  * @param oks      Resources with {@link StatusCode#OK} status.
  */
 public record StatusResponse(
-        @NonNull Map<String, Status> errors,
-        @NonNull Map<String, Status> warnings,
-        @NonNull Map<String, Status> oks) {
+    @NonNull Map<String, Status> errors,
+    @NonNull Map<String, Status> warnings,
+    @NonNull Map<String, Status> oks) {
 }

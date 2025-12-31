@@ -1,7 +1,5 @@
 package tech.ninedev.server.api;
 
-import java.util.List;
-
 import org.jspecify.annotations.NonNull;
 
 /**
@@ -10,14 +8,6 @@ import org.jspecify.annotations.NonNull;
  * @since 1.0.0
  */
 public interface Resource {
-    /**
-     * Get detailed messages.
-     *
-     * @return Important resource messages for server administrators.
-     */
-    @NonNull
-    List<Message> messages();
-
     /**
      * Get the resource's status.
      *

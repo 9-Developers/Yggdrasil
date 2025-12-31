@@ -7,21 +7,17 @@ import org.jspecify.annotations.NonNull;
 /**
  * Resource status.
  *
- * <p>
- * The message lists ({@code messages}, {@code warnings}, {@code errors}) will display in their own sections.
- * </p>
- *
- * @param code     Status code.
- * @param message  Overall (short) status message.
- * @param errors   Error messages.
- * @param warnings Warning messages.
- * @param messages Information (non-error) messages.
+ * @param code            Status code.
+ * @param message         Overall (short) status message.
+ * @param errorMessages   Error messages.
+ * @param warningMessages Warning messages.
+ * @param infoMessages    Information messages.
  * @since 1.0.0
  */
 public record Status(
-        @NonNull StatusCode code,
-        @NonNull String message,
-        @NonNull List<String> errors,
-        @NonNull List<String> warnings,
-        @NonNull List<String> messages) {
+    @NonNull StatusCode code,
+    @NonNull String message,
+    @NonNull List<String> errorMessages,
+    @NonNull List<String> warningMessages,
+    @NonNull List<String> infoMessages) {
 }

@@ -1,3 +1,3 @@
 # Contributors
 
-- Ryan Porterfield <ixirsii@ixirsii.tech>
+- Ryan Porterfield <ixirsii@9dev.tech>

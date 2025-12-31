@@ -10,6 +10,8 @@ repositories {
 }
 
 subprojects {
+    apply(plugin = "checkstyle")
+
     repositories {
         mavenCentral()
 
@@ -19,12 +21,12 @@ subprojects {
         }
     }
 
+    checkstyle {
+        configFile = rootProject.file("config/checkstyle/checkstyle.xml")
+        toolVersion = "12.3.0"
+    }
+
     tasks.withType<Test> {
         useJUnitPlatform()
     }
-}
-
-checkstyle {
-    configFile = rootProject.file("config/checkstyle/checkstyle.xml")
-    toolVersion = "12.3.0"
 }

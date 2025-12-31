@@ -5,7 +5,7 @@
 
 # 9craft Web Server
 
-[PaperMC][5] plugin for hosting a web server.
+Minecraft server ([PaperMC][5]) plugin that provides a web server other plugins can integrate with.
 
 [1]: https://discord.gg/KTgshSbEUU
 [2]: https://opensource.org/license/bsd-3-clause
