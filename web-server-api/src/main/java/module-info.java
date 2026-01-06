@@ -1,7 +1,7 @@
 /**
  * 9craft Web Server API.
  */
-module tech.ninedev.server.api {
+module tech.ninecraft.server.api {
     requires jakarta.validation;
     requires jakarta.ws.rs;
     requires java.logging;
@@ -11,5 +11,5 @@ module tech.ninedev.server.api {
     requires org.jspecify;
     requires org.slf4j;
 
-    exports tech.ninedev.server.api;
+    exports tech.ninecraft.server.api;
 }

@@ -1,12 +1,10 @@
 plugins {
-    `java-library`
-
     alias(libs.plugins.axion)
 }
 
 scmVersion {
     tag {
-        prefix = "plugin-"
+        prefix = "web-server-plugin-"
     }
 }
 

@@ -8,6 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/map-api" />
+            <option value="$PROJECT_DIR$/map-plugin" />
             <option value="$PROJECT_DIR$/web-server-api" />
             <option value="$PROJECT_DIR$/web-server-plugin" />
           </set>

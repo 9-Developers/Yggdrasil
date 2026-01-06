@@ -3,7 +3,7 @@ plugins {
     java
 }
 
-group = "tech.9dev"
+group = "tech.9craft"
 
 repositories {
     mavenCentral()
@@ -11,6 +11,7 @@ repositories {
 
 subprojects {
     apply(plugin = "checkstyle")
+    apply(plugin = "java-library")
 
     repositories {
         mavenCentral()

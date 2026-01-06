@@ -1,7 +1,6 @@
 import org.jreleaser.model.Active
 
 plugins {
-    `java-library`
     `maven-publish`
 
     alias(libs.plugins.axion)
@@ -10,7 +9,7 @@ plugins {
 
 scmVersion {
     tag {
-        prefix = "api-"
+        prefix = "web-server-api-"
     }
 }
 
@@ -66,10 +65,10 @@ publishing {
             from(components["java"])
 
             pom {
-                groupId = "tech.9dev.9craft"
+                groupId = "tech.9craft"
                 name = "9craft-web-server-api"
                 description = project.description
-                url = "https://gitlab.com/9developers/9craft/9craft-web-server/"
+                url = "https://gitlab.com/9developers/9craft"
                 developers {
                     developer {
                         id = "Ixirsii"
@@ -84,9 +83,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection = "scm:git:git@gitlab.com:9developers/9craft/9craft-web-server.git"
-                    developerConnection = "scm:git:git@gitlab.com:9developers/9craft/9craft-web-server.git"
-                    url = "https://gitlab.com/9developers/9craft/9craft-web-server/"
+                    connection = "scm:git:git@gitlab.com:9developers/9craft.git"
+                    developerConnection = "scm:git:git@gitlab.com:9developers/9craft.git"
+                    url = "https://gitlab.com/9developers/9craft"
                 }
             }
         }

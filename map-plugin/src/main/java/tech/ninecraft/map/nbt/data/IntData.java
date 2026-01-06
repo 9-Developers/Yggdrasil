@@ -1,0 +1,12 @@
+package tech.ninecraft.map.nbt.data;
+
+import org.jspecify.annotations.NonNull;
+
+/**
+ * NBT int data type.
+ *
+ * @param value Tag data.
+ * @since 1.0.0
+ */
+public record IntData(@NonNull Integer value) implements Data<Integer> {
+}

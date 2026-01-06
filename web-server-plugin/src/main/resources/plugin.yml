@@ -1,9 +1,9 @@
 name: 9craft-Web-Server
 version: 0.3.0
-main: tech.ninedev.server.WebServerPlugin
+main: tech.ninecraft.server.WebServerPlugin
 description: Web server which allows other plugins to provide REST APIs or HTTP endpoints.
 author: Ixirsii
-website: https://gitlab.com/9developers/9craft/9craft-web-server
+website: https://gitlab.com/9developers/9craft
 api-version: 1.21
 
 libraries:
