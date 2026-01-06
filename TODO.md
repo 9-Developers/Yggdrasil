@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Sort API responses
+- [x] Sort API responses
 - [ ] Admin restricted resources
   - [ ] Admin permission
   - [ ] Admin panel
