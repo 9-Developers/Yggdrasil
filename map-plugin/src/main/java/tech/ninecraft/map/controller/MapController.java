@@ -1,6 +1,6 @@
 package tech.ninecraft.map.controller;
 
-import tech.ninecraft.map.data.Message;
+import tech.ninecraft.map.model.Message;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

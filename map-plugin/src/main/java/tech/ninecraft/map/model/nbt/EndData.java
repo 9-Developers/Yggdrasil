@@ -1,4 +1,4 @@
-package tech.ninecraft.map.nbt.data;
+package tech.ninecraft.map.model.nbt;
 
 /**
  * NBT end data type.

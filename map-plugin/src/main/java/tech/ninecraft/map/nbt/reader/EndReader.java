@@ -1,7 +1,7 @@
 package tech.ninecraft.map.nbt.reader;
 
-import tech.ninecraft.map.nbt.data.EndData;
-import tech.ninecraft.map.nbt.data.ReadResult;
+import tech.ninecraft.map.model.nbt.EndData;
+import tech.ninecraft.map.model.nbt.ReadResult;
 
 import org.jspecify.annotations.NonNull;
 

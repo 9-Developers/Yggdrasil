@@ -1,8 +1,8 @@
 package tech.ninecraft.map.nbt.reader;
 
 import tech.ninecraft.map.error.BufferOverflowError;
-import tech.ninecraft.map.nbt.data.LongData;
-import tech.ninecraft.map.nbt.data.ReadResult;
+import tech.ninecraft.map.model.nbt.LongData;
+import tech.ninecraft.map.model.nbt.ReadResult;
 
 import java.nio.ByteBuffer;
 

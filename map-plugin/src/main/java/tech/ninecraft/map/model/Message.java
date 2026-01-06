@@ -1,4 +1,4 @@
-package tech.ninecraft.map.data;
+package tech.ninecraft.map.model;
 
 import org.jspecify.annotations.NonNull;
 

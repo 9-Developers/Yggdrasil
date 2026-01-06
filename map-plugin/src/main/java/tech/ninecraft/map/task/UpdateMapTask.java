@@ -1,10 +1,10 @@
 package tech.ninecraft.map.task;
 
-import tech.ninecraft.map.data.MapBlock;
-import tech.ninecraft.map.data.MapChunk;
-import tech.ninecraft.map.data.TaskBlock;
-import tech.ninecraft.map.data.TaskChunk;
-import tech.ninecraft.map.data.WorldMap;
+import tech.ninecraft.map.model.MapBlock;
+import tech.ninecraft.map.model.MapChunk;
+import tech.ninecraft.map.model.TaskBlock;
+import tech.ninecraft.map.model.TaskChunk;
+import tech.ninecraft.map.model.WorldMap;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;

@@ -3,7 +3,7 @@ package tech.ninecraft.map;
 import tech.ninecraft.map.api.WebMap;
 import tech.ninecraft.map.controller.MapBinder;
 import tech.ninecraft.map.controller.MapController;
-import tech.ninecraft.map.data.WorldMap;
+import tech.ninecraft.map.model.WorldMap;
 import tech.ninecraft.map.listener.ChunkPopulateListener;
 import tech.ninecraft.map.task.ReadRegionFileTask;
 import tech.ninecraft.map.task.UpdateMapTask;

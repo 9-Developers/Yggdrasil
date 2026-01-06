@@ -1,8 +1,8 @@
 package tech.ninecraft.map.listener;
 
-import tech.ninecraft.map.data.Location2;
-import tech.ninecraft.map.data.TaskBlock;
-import tech.ninecraft.map.data.TaskChunk;
+import tech.ninecraft.map.model.Location2;
+import tech.ninecraft.map.model.TaskBlock;
+import tech.ninecraft.map.model.TaskChunk;
 import tech.ninecraft.map.task.UpdateMapTask;
 
 import java.util.ArrayList;

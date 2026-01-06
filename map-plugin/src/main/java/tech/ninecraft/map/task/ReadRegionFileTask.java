@@ -1,20 +1,20 @@
 package tech.ninecraft.map.task;
 
-import tech.ninecraft.map.nbt.data.ByteArrayData;
-import tech.ninecraft.map.nbt.data.ByteData;
-import tech.ninecraft.map.nbt.data.CompoundData;
-import tech.ninecraft.map.nbt.data.Data;
-import tech.ninecraft.map.nbt.data.DoubleData;
-import tech.ninecraft.map.nbt.data.EndData;
-import tech.ninecraft.map.nbt.data.FloatData;
-import tech.ninecraft.map.nbt.data.IntArrayData;
-import tech.ninecraft.map.nbt.data.IntData;
-import tech.ninecraft.map.nbt.data.ListData;
-import tech.ninecraft.map.nbt.data.LongArrayData;
-import tech.ninecraft.map.nbt.data.LongData;
-import tech.ninecraft.map.nbt.data.ReadResult;
-import tech.ninecraft.map.nbt.data.ShortData;
-import tech.ninecraft.map.nbt.data.StringData;
+import tech.ninecraft.map.model.nbt.ByteArrayData;
+import tech.ninecraft.map.model.nbt.ByteData;
+import tech.ninecraft.map.model.nbt.CompoundData;
+import tech.ninecraft.map.model.nbt.Data;
+import tech.ninecraft.map.model.nbt.DoubleData;
+import tech.ninecraft.map.model.nbt.EndData;
+import tech.ninecraft.map.model.nbt.FloatData;
+import tech.ninecraft.map.model.nbt.IntArrayData;
+import tech.ninecraft.map.model.nbt.IntData;
+import tech.ninecraft.map.model.nbt.ListData;
+import tech.ninecraft.map.model.nbt.LongArrayData;
+import tech.ninecraft.map.model.nbt.LongData;
+import tech.ninecraft.map.model.nbt.ReadResult;
+import tech.ninecraft.map.model.nbt.ShortData;
+import tech.ninecraft.map.model.nbt.StringData;
 import tech.ninecraft.map.nbt.reader.TagReader;
 
 import java.io.BufferedInputStream;
@@ -40,7 +40,7 @@ public class ReadRegionFileTask implements Runnable {
     /** Header section byte size. */
     private static final int SECTOR_SIZE = 4096;
 
-    /** Region file chunk data bytes. */
+    /** Region file chunk model bytes. */
     private final byte[] data;
     /** Plugin logger. */
     @NonNull
@@ -116,7 +116,7 @@ public class ReadRegionFileTask implements Runnable {
             if (compoundResult.isSuccess()) {
                 processData(compoundResult.data());
             } else {
-                log.error("Failed to read chunk data\n\"{}\"", compoundResult.error().getMessage());
+                log.error("Failed to read chunk model\n\"{}\"", compoundResult.error().getMessage());
             }
 
             break;
@@ -126,11 +126,11 @@ public class ReadRegionFileTask implements Runnable {
     /* **************************************** Private utility methods ***************************************** */
 
     /**
-     * Decompress chunk data.
+     * Decompress chunk model.
      *
-     * @param offset Offset of chunk data in {@link ReadRegionFileTask#data}.
-     * @param size   Size of chunk data.
-     * @return Decompressed chunk data.
+     * @param offset Offset of chunk model in {@link ReadRegionFileTask#data}.
+     * @param size   Size of chunk model.
+     * @return Decompressed chunk model.
      */
     private byte[] decompressChunkData(final int offset, final int size) {
         final Inflater inflater = new Inflater();
@@ -148,7 +148,7 @@ public class ReadRegionFileTask implements Runnable {
             try {
                 bytesRead += inflater.inflate(chunkData, bytesRead, chunkData.length - bytesRead);
             } catch (final DataFormatException e) {
-                log.error("Failed to decompress chunk data", e);
+                log.error("Failed to decompress chunk model", e);
 
                 break;
             }
@@ -233,7 +233,7 @@ public class ReadRegionFileTask implements Runnable {
 
             if (dataBytesRead != data.length) {
                 log.error(
-                    "Error reading nbt {} data. Read {} bytes but expected {}",
+                    "Error reading nbt {} model. Read {} bytes but expected {}",
                     regionFile.getName(),
                     dataBytesRead,
                     data.length);

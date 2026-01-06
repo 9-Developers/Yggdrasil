@@ -1,9 +1,9 @@
 package tech.ninecraft.map.nbt.reader;
 
 import tech.ninecraft.map.error.UnrecognizedTypeIDError;
-import tech.ninecraft.map.nbt.data.CompoundData;
-import tech.ninecraft.map.nbt.data.Data;
-import tech.ninecraft.map.nbt.data.ReadResult;
+import tech.ninecraft.map.model.nbt.CompoundData;
+import tech.ninecraft.map.model.nbt.Data;
+import tech.ninecraft.map.model.nbt.ReadResult;
 
 import java.util.Collections;
 import java.util.HashMap;
