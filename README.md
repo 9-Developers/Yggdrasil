@@ -5,6 +5,8 @@
 
 # [9craft][5]
 
+![9craft logo](9craft%20Logo.png)
+
 [Website][5]
 
 A suite of Minecraft server ([PaperMC][6]) plugins.
