@@ -17,11 +17,11 @@ version = scmVersion.version
 description = "API for plugins integrating with 9craft Web Server"
 
 dependencies {
+    api(libs.grizzly.http.server)
     api(libs.jspecify)
 
     compileOnly(libs.paper.api)
 
-    implementation(libs.grizzly.http.server)
     implementation(libs.jakarta)
     implementation(libs.jakarta.validations.api)
     implementation(libs.jersey.hk2)

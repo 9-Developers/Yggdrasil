@@ -5,5 +5,5 @@ package tech.ninecraft.map.api;
  *
  * @since 1.0.0
  */
-public interface Map {
+public interface WebMap {
 }

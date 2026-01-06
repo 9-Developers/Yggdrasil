@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Noto Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* ********************************** Body ********************************** */
+
+a {
+  @apply text-blue-300;
+}
+
+body {
+  @apply bg-gray-50;
+  @apply dark:bg-gray-900;
+  @apply min-h-screen;
+  @apply dark:text-white;
+}
+
+main {
+  @apply mx-[10%];
+  @apply w-4/5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-extrabold;
+  @apply mb-12;
+}
+
+h1 {
+  @apply text-6xl;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-2xl;
+}
+
+h4 {
+  @apply text-xl;
+}
+
+h5 {
+  @apply text-lg;
+  @apply underline;
+}
+
+h6 {
+  @apply text-lg;
+}
+
+/* ********************************* Header ********************************* */
+
+header {
+  @apply justify-center;
+  @apply mb-16;
+  @apply shadow-lg/30;
+  @apply text-white;
+}
+
+header h1 {
+  @apply leading-relaxed;
+  @apply mb-0;
+  @apply text-center;
+  @apply text-white;
+}
+
+nav {
+  @apply flex;
+  @apply flex-row;
+  @apply font-semibold;
+  @apply justify-between;
+  @apply mx-[10%];
+  @apply w-4/5;
+}
+
+nav a {
+  @apply flex-1;
+  @apply hover:bg-white/25;
+  @apply leading-8;
+  @apply rounded-lg;
+  @apply text-black;
+  @apply dark:text-white;
+  @apply text-center;
+}
+
+.active {
+  @apply bg-white;
+  @apply text-black;
+}

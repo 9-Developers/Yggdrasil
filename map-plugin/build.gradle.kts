@@ -15,7 +15,10 @@ dependencies {
     compileOnly(libs.paper.api)
 
     implementation(libs.bundles.jakarta)
+    implementation(libs.jersey.hk2)
     implementation(libs.jspecify)
+    implementation(project(":map-api"))
+    implementation(project(":web-server-api"))
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)

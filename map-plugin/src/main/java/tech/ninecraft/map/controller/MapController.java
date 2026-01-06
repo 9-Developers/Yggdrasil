@@ -2,20 +2,31 @@ package tech.ninecraft.map.controller;
 
 import tech.ninecraft.map.data.Message;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import org.jspecify.annotations.NonNull;
+import org.slf4j.Logger;
+
+import static tech.ninecraft.map.controller.MapBinder.MOTD_NAME;
+import static tech.ninecraft.map.controller.MapBinder.PLUGIN_LOGGER_NAME;
 
 /**
  * REST controller.
  *
  * @since 1.0.0
  */
-@Path("/v1")
+@Path("/map")
 @Produces(MediaType.APPLICATION_JSON)
-public class ControllerV1 {
+@Singleton
+public class MapController {
+    /** Plugin logger. */
+    @NonNull
+    private final Logger log;
     /** Message of the day. */
     @NonNull
     private final String motd;
@@ -23,9 +34,14 @@ public class ControllerV1 {
     /**
      * Constructor.
      *
+     * @param log  Plugin logger.
      * @param motd Message of the day.
      */
-    public ControllerV1(@NonNull final String motd) {
+    @Inject
+    public MapController(
+        @NonNull @Named(PLUGIN_LOGGER_NAME) final Logger log,
+        @NonNull @Named(MOTD_NAME) final String motd) {
+        this.log = log;
         this.motd = motd;
     }
 
@@ -35,6 +51,7 @@ public class ControllerV1 {
      * @return Hello world!
      */
     @GET
+    @NonNull
     @Path("/hello")
     public Message hello() {
         return new Message("Hello world!");
@@ -46,6 +63,7 @@ public class ControllerV1 {
      * @return Server name.
      */
     @GET
+    @NonNull
     @Path("/motd")
     public Message motd() {
         return new Message(motd);

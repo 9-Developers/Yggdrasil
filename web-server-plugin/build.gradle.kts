@@ -13,7 +13,6 @@ description = "PaperMC plugin for hosting a web server"
 
 dependencies {
     compileOnly(libs.paper.api)
-    compileOnly(project(":web-server-api"))
 
     implementation(libs.grizzly.http.server)
     implementation(platform(libs.jackson.bom))
@@ -21,6 +20,7 @@ dependencies {
     implementation(libs.bundles.jakarta)
     implementation(libs.bundles.jersey)
     implementation(libs.jspecify)
+    implementation(project(":web-server-api"))
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)

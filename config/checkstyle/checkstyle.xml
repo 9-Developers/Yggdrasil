@@ -85,7 +85,7 @@
         <!-- https://checkstyle.org/checks/imports/index.html -->
         <module name="AvoidStarImport"/>
         <module name="CustomImportOrder">
-            <property name="customImportOrderRules" value="SAME_PACKAGE(3), STANDARD_JAVA_PACKAGE, THIRD_PARTY_PACKAGE, STATIC"/>
+            <property name="customImportOrderRules" value="SAME_PACKAGE(2), STANDARD_JAVA_PACKAGE, THIRD_PARTY_PACKAGE, STATIC"/>
             <property name="separateLineBetweenGroups" value="true"/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
         </module>

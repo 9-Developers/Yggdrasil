@@ -6,7 +6,6 @@ module tech.ninecraft.server {
     requires jakarta.inject;
     requires jakarta.ws.rs;
     requires jakarta.validation;
-    requires java.logging;
     requires org.bukkit;
     requires org.glassfish.grizzly.http.server;
     requires org.glassfish.hk2.api;

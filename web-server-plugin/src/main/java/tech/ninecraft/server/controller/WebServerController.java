@@ -26,8 +26,8 @@ import jakarta.ws.rs.core.MediaType;
 import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 
-import static tech.ninecraft.server.binder.WebServerBinder.PLUGIN_LOGGER_NAME;
-import static tech.ninecraft.server.binder.WebServerBinder.REGISTERED_PLUGINS_NAME;
+import static tech.ninecraft.server.controller.WebServerBinder.PLUGIN_LOGGER_NAME;
+import static tech.ninecraft.server.controller.WebServerBinder.REGISTERED_PLUGINS_NAME;
 
 /**
  * Plugin status controller.

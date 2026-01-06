@@ -1,4 +1,4 @@
-package tech.ninecraft.server.binder;
+package tech.ninecraft.server.controller;
 
 import tech.ninecraft.server.model.RegisteredPlugin;
 
@@ -42,7 +42,7 @@ public class WebServerBinder extends AbstractBinder {
 
     @Override
     protected void configure() {
-        log.info("Configuring binder");
+        log.trace("Configuring binder");
 
         bind(log).to(Logger.class).named(PLUGIN_LOGGER_NAME);
         bind(registeredPlugins)

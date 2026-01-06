@@ -4,8 +4,8 @@ import tech.ninecraft.server.api.Resource;
 import tech.ninecraft.server.api.Status;
 import tech.ninecraft.server.api.StatusCode;
 import tech.ninecraft.server.api.WebServer;
-import tech.ninecraft.server.binder.WebServerBinder;
 import tech.ninecraft.server.controller.CorsFilter;
+import tech.ninecraft.server.controller.WebServerBinder;
 import tech.ninecraft.server.controller.WebServerController;
 import tech.ninecraft.server.model.RegisteredPlugin;
 
@@ -97,7 +97,8 @@ public class WebServerPlugin extends JavaPlugin implements Resource, WebServer {
 
     @Override
     public void onDisable() {
-        log.trace("Disabling {}", getName());
+        log.trace("Disabling plugin");
+
         statusCode = StatusCode.OK;
         message = "Stopped";
 
@@ -106,7 +107,7 @@ public class WebServerPlugin extends JavaPlugin implements Resource, WebServer {
 
     @Override
     public void onEnable() {
-        log.trace("Enabling {}", getName());
+        log.trace("Enabling plugin");
 
         saveDefaultConfig();
 

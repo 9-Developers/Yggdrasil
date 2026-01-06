@@ -7,4 +7,8 @@ website: https://gitlab.com/9developers/9craft
 api-version: 1.21
 
 libraries:
+  - jakarta.ws.rs:jakarta.ws.rs-api:4.0.0
   - org.jspecify:jspecify:1.0.0
+
+depend:
+  - 9craft-Web-Server
