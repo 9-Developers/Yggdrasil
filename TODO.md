@@ -3,6 +3,7 @@
 ## Web Server
 
 - [x] Sort API responses
+- [ ] Web sockets
 - [ ] Admin restricted resources
   - [ ] Admin permission
   - [ ] Admin panel
