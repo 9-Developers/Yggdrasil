@@ -14,13 +14,13 @@ description = "PaperMC plugin for hosting a web server"
 dependencies {
     compileOnly(libs.paper.api)
 
-    implementation(libs.grizzly.http.server)
     implementation(platform(libs.jackson.bom))
     implementation(libs.bundles.jackson)
     implementation(libs.bundles.jakarta)
+    implementation(platform(libs.jersey.bom))
     implementation(libs.bundles.jersey)
     implementation(libs.jspecify)
-    implementation(project(":web-server-api"))
+    implementation(project(":api-web-server"))
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
@@ -28,15 +28,9 @@ dependencies {
     testRuntimeOnly(libs.junit.platform.launcher)
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 tasks.withType<Jar> {
     archiveBaseName = "9craft-web-server"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    from(project(":web-server-api").sourceSets.main.get().output)
+    from(project(":api-web-server").sourceSets.main.get().output)
 }

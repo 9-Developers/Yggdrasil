@@ -3,4 +3,4 @@ plugins {
 }
 
 rootProject.name = "9craft"
-include("map-api", "map-plugin", "web-server-api", "web-server-plugin")
+include("api-map", "api-web-server", "plugin-map", "plugin-web-server")

@@ -9,26 +9,27 @@ plugins {
 
 scmVersion {
     tag {
-        prefix = "map-api-"
+        prefix = "web-server-api-"
     }
 }
 
 version = scmVersion.version
-description = "API for plugins integrating with 9craft Map"
+description = "API for plugins integrating with 9craft Web Server"
 
 dependencies {
     api(libs.jspecify)
 
     compileOnly(libs.paper.api)
 
+    implementation(libs.jakarta)
+    implementation(libs.jakarta.validations.api)
+    implementation(platform(libs.jersey.bom))
+    implementation(libs.jersey.container.grizzly)
+    implementation(libs.jersey.hk2)
     implementation(libs.slf4j.api)
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-
     withJavadocJar()
     withSourcesJar()
 }
@@ -62,7 +63,7 @@ publishing {
 
             pom {
                 groupId = "tech.9craft"
-                name = "9craft-map-api"
+                name = "9craft-web-server-api"
                 description = project.description
                 url = "https://gitlab.com/9developers/9craft"
                 developers {

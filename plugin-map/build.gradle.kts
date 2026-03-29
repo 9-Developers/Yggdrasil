@@ -15,19 +15,15 @@ dependencies {
     compileOnly(libs.paper.api)
 
     implementation(libs.bundles.jakarta)
+    implementation(platform(libs.jersey.bom))
+    implementation(libs.jersey.container.grizzly)
     implementation(libs.jersey.hk2)
     implementation(libs.jspecify)
-    implementation(project(":map-api"))
-    implementation(project(":web-server-api"))
+    implementation(project(":api-map"))
+    implementation(project(":api-web-server"))
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
 
     testRuntimeOnly(libs.junit.platform.launcher)
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
 }
