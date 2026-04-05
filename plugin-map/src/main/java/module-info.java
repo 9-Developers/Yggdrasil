@@ -4,6 +4,7 @@
 module tech.ninecraft.map {
     requires jakarta.inject;
     requires jakarta.ws.rs;
+    requires jdk.incubator.vector;
     requires org.bukkit;
     requires org.glassfish.jersey.core.common;
     requires org.glassfish.jersey.inject.hk2;

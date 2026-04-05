@@ -25,5 +25,13 @@ dependencies {
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
 
-    testRuntimeOnly(libs.junit.platform.launcher)
+    testRuntimeOnly(libs.bundles.junit)
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.addAll(listOf("--add-modules", "jdk.incubator.vector"))
+}
+
+tasks.withType<Test>().configureEach {
+    jvmArgs("--add-modules", "jdk.incubator.vector")
 }

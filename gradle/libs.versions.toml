@@ -32,6 +32,7 @@ jersey-server = { group = "org.glassfish.jersey.core", name = "jersey-server" }
 jspecify = { group = "org.jspecify", name = "jspecify", version.ref = "jspecify" }
 junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
+junit-platform-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine" }
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
 paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
@@ -40,3 +41,4 @@ slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 jackson = ["jackson-core", "jackson-databind"]
 jakarta = ["jakarta", "jakarta-inject", "jakarta-json", "jakarta-validations-api"]
 jersey = ["jersey-container-grizzly", "jersey-hk2", "jersey-json", "jersey-server"]
+junit = ["junit-platform-engine", "junit-platform-launcher"]

@@ -1,78 +1,119 @@
 package tech.ninecraft.map.nbt.section;
 
-import java.util.Optional;
+import jdk.incubator.vector.LongVector;
+import jdk.incubator.vector.VectorOperators;
 
 /**
- * Interface for reading indices from section data.
+ * Read indices from NBT data.
  *
  * @since 1.0.0
  */
-public sealed interface IndexReader
-        permits IndexReader4Bit, IndexReader5Bit, IndexReader6Bit, IndexReader7Bit, IndexReader8Bit, IndexReader9Bit,
-        IndexReaderABit, IndexReaderBBit, IndexReaderCBit {
+public class IndexReader {
+    /** Index readers by bit size. */
+    private static final IndexReader[] INDEX_READERS = new IndexReader[9];
 
-    /** Index reader for 4-bit indices. */
-    IndexReader4Bit INDEX_READER_4_BIT = new IndexReader4Bit();
-    /** Index reader for 5-bit indices. */
-    IndexReader5Bit INDEX_READER_5_BIT = new IndexReader5Bit();
-    /** Index reader for 6-bit indices. */
-    IndexReader6Bit INDEX_READER_6_BIT = new IndexReader6Bit();
-    /** Index reader for 7-bit indices. */
-    IndexReader7Bit INDEX_READER_7_BIT = new IndexReader7Bit();
-    /** Index reader for 8-bit indices. */
-    IndexReader8Bit INDEX_READER_8_BIT = new IndexReader8Bit();
-    /** Index reader for 9-bit indices. */
-    IndexReader9Bit INDEX_READER_9_BIT = new IndexReader9Bit();
-    /** Index reader for 10-bit indices. */
-    IndexReaderABit INDEX_READER_A_BIT = new IndexReaderABit();
-    /** Index reader for 11-bit indices. */
-    IndexReaderBBit INDEX_READER_B_BIT = new IndexReaderBBit();
-    /** Index reader for 12-bit indices. */
-    IndexReaderCBit INDEX_READER_C_BIT = new IndexReaderCBit();
-
-    /* ***************************************** Static utility methods ***************************************** */
+    /** First batch element count. */
+    private final int batchElementCountFirst;
+    /** Second batch element count. */
+    private final int batchElementCountSecond;
+    /** First four-bit mask vector. */
+    private final LongVector bitMasksFirst;
+    /** Second four-bit mask vector. */
+    private final LongVector bitMasksSecond;
+    /** First bit shift vector. */
+    private final LongVector bitShiftsFirst;
+    /** Second bit shift vector. */
+    private final LongVector bitShiftsSecond;
+    /** Number of indices packed per element. */
+    private final int indicesPerElement;
 
     /**
-     * Get the appropriate index reader based on palette length.
+     * Constructor.
      *
-     * @param paletteLength Palette length.
-     * @return Index reader for section data.
+     * @param bitSize Bit-size of indices in NBT data.
      */
-    static Optional<IndexReader> getIndexReader(final int paletteLength) {
-        if (paletteLength <= 16) {
-            return Optional.of(INDEX_READER_4_BIT);
-        } else if (paletteLength <= 32) {
-            return Optional.of(INDEX_READER_5_BIT);
-        } else if (paletteLength <= 64) {
-            return Optional.of(INDEX_READER_6_BIT);
-        } else if (paletteLength <= 128) {
-            return Optional.of(INDEX_READER_7_BIT);
-        } else if (paletteLength <= 256) {
-            return Optional.of(INDEX_READER_8_BIT);
-        } else if (paletteLength <= 512) {
-            return Optional.of(INDEX_READER_9_BIT);
-        } else if (paletteLength <= 1024) {
-            return Optional.of(INDEX_READER_A_BIT);
-        } else if (paletteLength <= 2048) {
-            return Optional.of(INDEX_READER_B_BIT);
-        } else if (paletteLength <= 4096) {
-            return Optional.of(INDEX_READER_C_BIT);
-        } else {
-            return Optional.empty();
-        }
+    private IndexReader(final int bitSize) {
+        final long bitMask = Math.toIntExact(Math.round(Math.pow(2, bitSize))) - 1;
+
+        indicesPerElement = 64 / bitSize;
+        batchElementCountFirst = Math.min(8, indicesPerElement);
+        batchElementCountSecond = Math.clamp(indicesPerElement - batchElementCountFirst, 0, 8);
+        bitMasksFirst = LongVector.fromArray(
+            LongVector.SPECIES_512,
+            new long[] { bitMask, bitMask << bitSize, bitMask << (bitSize * 2), bitMask << (bitSize * 3),
+                bitMask << (bitSize * 4), bitMask << (bitSize * 5), bitMask << (bitSize * 6),
+                bitMask << (bitSize * 7), },
+            0);
+        bitMasksSecond = LongVector.fromArray(
+            LongVector.SPECIES_512,
+            new long[] { bitMask << (bitSize * 8), bitMask << (bitSize * 9), bitMask << (bitSize * 10),
+                bitMask << (bitSize * 11), bitMask << (bitSize * 12), bitMask << (bitSize * 13),
+                bitMask << (bitSize * 14), bitMask << (bitSize * 15), },
+            0);
+        bitShiftsFirst = LongVector.fromArray(
+            LongVector.SPECIES_512,
+            new long[] { 0, bitSize, bitSize * 2L, bitSize * 3L, bitSize * 4L, bitSize * 5L, bitSize * 6L,
+                bitSize * 7L, },
+            0);
+        bitShiftsSecond = LongVector.fromArray(
+            LongVector.SPECIES_512,
+            new long[] { bitSize * 8L, bitSize * 9L, bitSize * 10L, bitSize * 11L, bitSize * 12L, bitSize * 13L,
+                bitSize * 14L, bitSize * 15L, },
+            0);
     }
 
-    /* ******************************************** Abstract methods ******************************************** */
+    /**
+     * Get an index reader for {@code bitSize}.
+     *
+     * @param bitSize Bit-size of indices in NBT data.
+     * @return Index reader for {@code bitSize}.
+     */
+    public static IndexReader getIndexReader(final int bitSize) {
+        if (bitSize < 4 || bitSize > 12) {
+            throw new IllegalArgumentException("Bit size must be in the range [4, 12]");
+        }
+
+        final int index = bitSize - 4;
+
+        if (INDEX_READERS[index] == null) {
+            INDEX_READERS[index] = new IndexReader(bitSize);
+        }
+
+        return INDEX_READERS[index];
+    }
 
     /**
      * Read (unpack) indices from section data.
      *
-     * <p>
-     * There are fewer than 32,767 blocks in minecraft so we can safely fit each index in a short.
-     * </p>
-     *
      * @param data Section data.
      * @return Unpacked indices.
      */
-    short[] readIndices(long[] data);
+    public int[] readIndices(final long[] data) {
+        final int[] results = new int[data.length * indicesPerElement];
+
+        for (int i = 0; i < data.length; ++i) {
+            final long value = data[i];
+
+            final LongVector indexBitsFirst = bitMasksFirst.and(value);
+            final LongVector shiftedBitsFirst = indexBitsFirst.lanewise(VectorOperators.LSHR, bitShiftsFirst);
+            final int[] indicesFirst = shiftedBitsFirst.convert(VectorOperators.L2I, 0).toIntArray();
+
+            System.arraycopy(indicesFirst, 0, results, i * indicesPerElement, batchElementCountFirst);
+
+            if (batchElementCountSecond > 0) {
+                final LongVector indexBits2 = bitMasksSecond.and(value);
+                final LongVector shiftedBits2 = indexBits2.lanewise(VectorOperators.LSHR, bitShiftsSecond);
+                final int[] indices2 = shiftedBits2.convert(VectorOperators.L2I, 0).toIntArray();
+
+                System.arraycopy(
+                    indices2,
+                    0,
+                    results,
+                    (i * indicesPerElement) + batchElementCountFirst,
+                    batchElementCountSecond);
+            }
+        }
+
+        return results;
+    }
 }
