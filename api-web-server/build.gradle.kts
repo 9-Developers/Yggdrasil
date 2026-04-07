@@ -9,7 +9,7 @@ plugins {
 
 scmVersion {
     tag {
-        prefix = "web-server-api-"
+        prefix = "api-web-server-"
     }
 }
 

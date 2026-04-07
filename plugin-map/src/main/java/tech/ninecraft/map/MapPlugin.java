@@ -38,7 +38,7 @@ public class MapPlugin extends JavaPlugin implements WebMap, Resource {
     /** Plugin status error messages. */
     @NonNull
     private final List<String> errorMessages;
-    /** Plugin status info messages. */
+    /** Plugin status information messages. */
     @NonNull
     private final List<String> infoMessages;
     /** Plugin logger. */

@@ -9,7 +9,7 @@ plugins {
 
 scmVersion {
     tag {
-        prefix = "map-api-"
+        prefix = "api-map-"
     }
 }
 

@@ -4,7 +4,7 @@ plugins {
 
 scmVersion {
     tag {
-        prefix = "web-server-plugin-"
+        prefix = "plugin-web-server-"
     }
 }
 

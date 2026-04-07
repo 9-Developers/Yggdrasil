@@ -4,7 +4,7 @@ plugins {
 
 scmVersion {
     tag {
-        prefix = "map-plugin-"
+        prefix = "plugin-map-"
     }
 }
 
