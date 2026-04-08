@@ -1,7 +1,7 @@
 import { type ReactNode, useEffect, useState } from "react";
 import { Link } from "react-router";
 
-function Plugins(): ReactNode {
+export function Plugins(): ReactNode {
   const [plugins, setPlugins] = useState<string[]>([]);
 
   useEffect(() => {
@@ -18,14 +18,10 @@ function Plugins(): ReactNode {
       <ul>
         {plugins.map((plugin) => (
           <li key={plugin}>
-            <Link to={plugin}>
-              {plugin}
-            </Link>
+            <Link to={plugin}>{plugin}</Link>
           </li>
         ))}
       </ul>
     </>
   );
 }
-
-export default Plugins;

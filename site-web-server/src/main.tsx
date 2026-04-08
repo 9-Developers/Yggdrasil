@@ -4,12 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 import "./index.css";
 
-import Layout from "~/components/layout";
-import Home from "~/pages/home";
-import Plugin from "~/pages/plugin";
-import Plugins from "~/pages/plugins";
-import Resources from "~/pages/resources";
-import Status from "~/pages/status";
+import { Layout } from "~/components";
+import { Home, Plugin, Plugins, Resources, Status } from "~/pages";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -1,8 +1,8 @@
 import { type ReactNode, useEffect, useState } from "react";
 
-import PluginResources from "~/components/plugin-resources";
+import { PluginResources } from "~/components";
 
-function Resources(): ReactNode {
+export function Resources(): ReactNode {
   const [resources, setResources] = useState<Record<string, string[]>>({});
 
   useEffect(() => {
@@ -17,10 +17,12 @@ function Resources(): ReactNode {
       <h1>Registered resources</h1>
 
       {Object.keys(resources).map((plugin) => (
-        <PluginResources key={plugin} plugin={plugin} resources={resources[plugin]} />
+        <PluginResources
+          key={plugin}
+          plugin={plugin}
+          resources={resources[plugin]}
+        />
       ))}
     </>
   );
 }
-
-export default Resources;

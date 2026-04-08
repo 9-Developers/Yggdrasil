@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
 
-function Status(): ReactNode {
-  return <div>Status</div>;
+export function Status(): ReactNode {
+  return <h1>Status</h1>;
 }
-
-export default Status;

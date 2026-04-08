@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Outlet } from "react-router";
 
-import Header from "~/components/header";
+import { Header } from "~/components";
 
-function Layout(): ReactNode {
+export function Layout(): ReactNode {
   return (
     <>
       <Header />
@@ -14,5 +14,3 @@ function Layout(): ReactNode {
     </>
   );
 }
-
-export default Layout;

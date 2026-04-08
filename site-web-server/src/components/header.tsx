@@ -1,10 +1,13 @@
 import type { ReactNode } from "react";
 import { NavLink } from "react-router";
 
-function Header(): ReactNode {
+import { Settings } from "~/components";
+
+export function Header(): ReactNode {
   return (
     <header>
       <h1>9craft Web Server</h1>
+
       <nav>
         <NavLink
           className={({ isActive }) =>
@@ -40,8 +43,8 @@ function Header(): ReactNode {
           Status
         </NavLink>
       </nav>
+
+      <Settings />
     </header>
   );
 }
-
-export default Header;

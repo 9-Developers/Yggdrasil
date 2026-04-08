@@ -1,8 +1,8 @@
 import { type ReactNode, useEffect, useState } from "react";
 
-import PluginPaths from "~/components/plugin-paths";
+import { PluginPaths } from "~/components";
 
-function Home(): ReactNode {
+export function Home(): ReactNode {
   const [paths, setPaths] = useState<Record<string, string[]>>({});
 
   useEffect(() => {
@@ -22,5 +22,3 @@ function Home(): ReactNode {
     </>
   );
 }
-
-export default Home;

@@ -1,9 +1,9 @@
 import { type ReactNode, useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 
-import { type PluginResponse } from "~/types/plugin-response";
+import { type PluginResponse } from "~/types";
 
-function Plugin(): ReactNode {
+export function Plugin(): ReactNode {
   const [registeredPlugin, setRegisteredPlugin] = useState<PluginResponse>();
   const { plugin } = useParams();
 
@@ -23,9 +23,7 @@ function Plugin(): ReactNode {
       <ul>
         {registeredPlugin?.paths.map((path) => (
           <li key={path}>
-            <Link to={path}>
-              {path}
-            </Link>
+            <Link to={path}>{path}</Link>
           </li>
         ))}
       </ul>
@@ -44,5 +42,3 @@ function Plugin(): ReactNode {
     </>
   );
 }
-
-export default Plugin;
