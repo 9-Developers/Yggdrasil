@@ -4,14 +4,32 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
+                <projects>
+                  <project path="$PROJECT_DIR$/buildSrc" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/api-map" />
-            <option value="$PROJECT_DIR$/api-web-server" />
-            <option value="$PROJECT_DIR$/plugin-map" />
-            <option value="$PROJECT_DIR$/plugin-web-server" />
+            <option value="$PROJECT_DIR$/9craft-chat-api" />
+            <option value="$PROJECT_DIR$/9craft-core-api" />
+            <option value="$PROJECT_DIR$/9craft-data-api" />
+            <option value="$PROJECT_DIR$/9craft-data-plugin" />
+            <option value="$PROJECT_DIR$/9craft-economy-api" />
+            <option value="$PROJECT_DIR$/9craft-map-api" />
+            <option value="$PROJECT_DIR$/9craft-map-plugin" />
+            <option value="$PROJECT_DIR$/9craft-permission-api" />
+            <option value="$PROJECT_DIR$/9craft-web-server-api" />
+            <option value="$PROJECT_DIR$/9craft-web-server-plugin" />
+            <option value="$PROJECT_DIR$/buildSrc" />
           </set>
         </option>
       </GradleProjectSettings>

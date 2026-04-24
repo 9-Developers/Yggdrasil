@@ -1,0 +1,33 @@
+# Can be mongo, mysql, postgres, or sqlite.
+database: sqlite
+
+# MongoDB connection settings
+mongo:
+  database: server
+  host: localhost
+  port: 27017
+  username: root
+  password: 'password'
+  ssl: true
+
+# MySQL connection settings
+mysql:
+  database: server
+  host: localhost
+  port: 3306
+  username: root
+  password: 'password'
+  ssl: true
+
+# PostgreSQL connection settings
+postgres:
+  database: server
+  host: localhost
+  port: 5432
+  username: root
+  password: 'password'
+  ssl: true
+
+# SQLite connection settings
+sqlite:
+  database: server.db

@@ -18,19 +18,89 @@ and this project adheres to
 
 ### Removed
 
-## Web Server API - 0.5.0 (2026-01-06)
+## Chat API – 0.1.0 (2026-04-24)
+
+Created initial 9craft Chat API.
 
 ### Added
 
-### Removed
+- Chat interface
 
-## Web Server Plugin - 0.5.0 (2026-01-06)
+## Core API – 0.1.0 (2026-04-24)
+
+Created initial 9craft Core API.
 
 ### Added
 
-### Removed
+- Group interface
 
-## Map Plugin - 0.2.0 (2026-01-06)
+## Data API – 0.1.0 (2026-04-24)
+
+Created initial 9craft Data API.
+
+### Added
+
+- Data interface
+- Annotation definitions
+
+## Data Plugin – 0.1.0 (2026-04-24)
+
+Created initial 9craft Data plugin.
+
+### Added
+
+- ORM annotations
+- Main plugin class
+- SQLite support
+
+## Economy API – 0.1.0 (2026-04-24)
+
+Created initial 9craft Economy API.
+
+### Added
+
+- Economy interface
+- Currency definition
+- Currency store
+- Currency value
+
+## Permission API – 0.1.0 (2026-04-24)
+
+Created initial 9craft Permission API.
+
+### Added
+
+- Permission interface
+
+## Site Lib – 0.1.0 (2026-04-24)
+
+Created initial 9craft site library.
+
+### Added
+
+- Icons
+- Spinner
+- Theme item
+- Theme switcher
+
+## Web Server API – 0.6.0 (2026-04-24)
+
+### Added
+
+- Error response
+- Exceptions
+
+## Web Server Plugin – 0.6.0 (2026-04-24)
+
+### Added
+
+- Auth controller
+
+## Web Server API – 0.5.0 (2026-01-06)
+
+## Web Server Plugin – 0.5.0 (2026-01-06)
+
+## Map Plugin – 0.2.0 (2026-01-06)
 
 ### Changed
 

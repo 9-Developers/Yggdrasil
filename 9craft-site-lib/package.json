@@ -1,0 +1,69 @@
+{
+  "name": "9craft-web-lib",
+  "version": "1.0.0",
+  "description": "Components and configuration for 9craft Web Server sites",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "check": "pnpm run lint && pnpm run typecheck",
+    "clean": "rm -rf dist",
+    "dev": "vite",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "9craft"
+  ],
+  "author": "Ryan Porterfield <ixirsii@9dev.tech>",
+  "license": "BSD 3-Clause",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./style.css": {
+      "import": "./dist/style.css"
+    }
+  },
+  "packageManager": "pnpm@10.33.0",
+  "devDependencies": {
+    "@catppuccin/tailwindcss": "^1",
+    "@eslint/js": "10.0.1",
+    "@microsoft/api-extractor": "7.58.1",
+    "@tailwindcss/vite": "4.2.2",
+    "@types/node": "25.5.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
+    "eslint": "9.39.4",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-prettier": "5.5.5",
+    "eslint-plugin-react-compiler": "19.1.0-rc.2",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.5.2",
+    "globals": "17.4.0",
+    "prettier": "3.8.1",
+    "prettier-plugin-tailwindcss": "0.7.2",
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.58.1",
+    "unplugin-dts": "1.0.0-beta.6",
+    "vite": "8.0.7"
+  },
+  "peerDependencies": {
+    "@catppuccin/tailwindcss": "^1",
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwindcss": "^4"
+  }
+}

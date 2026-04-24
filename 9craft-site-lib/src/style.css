@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+@import "tailwindcss";
+@import "@catppuccin/tailwindcss/mocha.css";
+
+@theme {
+  --font-mono: "Source Code Pro", monospace;
+  --font-sans:
+    "Inter", "Noto Sans", ui-sans-serif, system-ui, sans-serif,
+    "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* ********************************** Body ********************************** */
+
+body {
+  @apply bg-ctp-base;
+  @apply min-h-screen;
+  @apply text-ctp-text;
+}
+
+/* ********************************* Header ********************************* */
+
+header {
+  @apply bg-ctp-mantle;
+  @apply flex;
+  @apply flex-row;
+  @apply gap-12;
+  @apply justify-between;
+  @apply mb-8;
+  @apply px-[10%];
+  @apply shadow-lg/30;
+  @apply shadow-ctp-green;
+}
+
+header a {
+  @apply text-center;
+}
+
+header details {
+  @apply flex;
+  @apply flex-col;
+  @apply justify-center;
+  @apply relative;
+}
+
+header details li {
+  @apply hover:bg-ctp-surface0;
+  @apply transition-colors;
+}
+
+header details summary {
+  @apply border;
+  @apply border-ctp-green;
+  @apply list-none;
+  @apply p-2;
+  @apply rounded-lg;
+}
+
+header details li,
+header details summary {
+  @apply cursor-pointer;
+  @apply flex;
+  @apply flex-row;
+  @apply gap-2;
+  @apply items-center;
+}
+
+header details ul {
+  @apply absolute;
+  @apply bg-ctp-mantle;
+  @apply mt-1;
+  @apply p-2;
+  @apply right-0;
+  @apply shadow-lg/30;
+  @apply shadow-ctp-green;
+  @apply min-w-max;
+  @apply z-10;
+}
+
+header details .expand-icon {
+  @apply duration-300;
+  @apply rotate-0;
+}
+
+header details:open .expand-icon {
+  @apply -rotate-90;
+}
+
+header h1 {
+  @apply leading-relaxed;
+  @apply mb-0;
+}
+
+nav {
+  @apply flex;
+  @apply flex-row;
+  @apply font-semibold;
+  @apply grow;
+}
+
+nav a {
+  @apply hover:bg-ctp-green/30;
+  @apply flex;
+  @apply flex-1;
+  @apply flex-col;
+  @apply justify-center;
+  @apply leading-8;
+  @apply rounded-lg;
+}
+
+.active {
+  @apply bg-ctp-green/20;
+}
+
+.settings {
+  @apply flex;
+  @apply flex-row;
+  @apply gap-4;
+}
+
+.settings a {
+  @apply flex;
+  @apply flex-col;
+  @apply justify-center;
+}
+
+/* ********************************** Main ********************************** */
+
+main {
+  @apply mx-[10%];
+  @apply w-4/5;
+}
+
+main a {
+  @apply text-ctp-green;
+  @apply hover:underline;
+}
+
+blockquote {
+  @apply bg-ctp-surface0;
+  @apply border-ctp-green;
+  @apply border-l-2;
+  @apply mb-4;
+  @apply px-6;
+  @apply py-1;
+}
+
+blockquote p {
+  @apply mb-0;
+}
+
+button {
+  @apply bg-ctp-surface0;
+  @apply hover:bg-ctp-surface2;
+  @apply cursor-pointer;
+  @apply p-2;
+  @apply rounded-lg;
+  @apply transition-colors;
+}
+
+code {
+  @apply bg-ctp-surface0;
+  @apply py-1;
+  @apply rounded-lg;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-inherit;
+}
+
+h1 {
+  @apply font-extrabold;
+  @apply mb-6;
+  @apply text-5xl;
+}
+
+h2 {
+  @apply font-extrabold;
+  @apply mb-4;
+  @apply text-3xl;
+}
+
+h3 {
+  @apply font-bold;
+  @apply mb-2;
+  @apply text-xl;
+}
+
+h4 {
+  @apply font-bold;
+  @apply mb-2;
+  @apply text-lg;
+}
+
+h5 {
+  @apply font-semibold;
+  @apply mb-1;
+  @apply text-lg;
+}
+
+h6 {
+  @apply mb-1;
+  @apply text-lg;
+}
+
+hr {
+  @apply border-ctp-green;
+  @apply my-4;
+}
+
+p {
+  @apply mb-4;
+}
+
+.loading {
+  @apply flex;
+  @apply grow;
+  @apply items-center;
+  @apply justify-center;
+}
+
+.loading svg {
+  @apply animate-spin;
+  @apply fill-ctp-green;
+  @apply h-8;
+  @apply w-8;
+  @apply text-ctp-overlay0;
+}
