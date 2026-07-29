@@ -80,7 +80,9 @@ export default defineConfig([
     },
     settings: {
       "import-x/internal-regex": "^~/",
-      "import-x/resolver-next": [createTypeScriptImportResolver()],
+      "import-x/resolver-next": [
+        createTypeScriptImportResolver({ project: "./tsconfig.app.json" }),
+      ],
     },
   },
   prettier,
