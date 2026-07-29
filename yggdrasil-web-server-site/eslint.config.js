@@ -1,41 +1,57 @@
-import js from "@eslint/js";
-import globals from "globals";
-import prettier from "eslint-plugin-prettier/recommended";
-import importPlugin from "eslint-plugin-import";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
+import * as tsParser from "@typescript-eslint/parser";
 import { defineConfig, globalIgnores } from "eslint/config";
-import tseslint from "typescript-eslint";
+import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
+import { importX } from "eslint-plugin-import-x";
+import prettier from "eslint-plugin-prettier/recommended";
+import reactHooks from "eslint-plugin-react-hooks";
+import { reactRefresh } from "eslint-plugin-react-refresh";
+import globals from "globals";
+import { configs } from "typescript-eslint";
 
 export default defineConfig([
   globalIgnores(["dist"]),
   {
     name: "9developers",
-    files: ["**/*.{ts,tsx}"],
     extends: [
-      importPlugin.flatConfigs.recommended,
-      js.configs.recommended,
+      ...configs.recommended,
+      ...configs.recommendedTypeChecked,
+      ...configs.stylisticTypeChecked,
+      importX.flatConfigs.recommended,
+      importX.flatConfigs.typescript,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      tseslint.configs.recommendedTypeChecked,
-      tseslint.configs.stylisticTypeChecked,
     ],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2025,
       globals: globals.browser,
+      parser: tsParser,
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ["eslint.config.js", "prettier.config.js"],
+        },
       },
+      sourceType: "module",
     },
     linterOptions: {
       reportUnusedDisableDirectives: true,
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": [
+      "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/consistent-type-imports": [
         "error",
+        { prefer: "type-imports", fixStyle: "inline-type-imports" },
+      ],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
         { argsIgnorePattern: "^_" },
       ],
-      "import/order": [
+      "@typescript-eslint/require-await": "off",
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        { checksVoidReturn: { attributes: false } },
+      ],
+      "import-x/order": [
         "error",
         {
           alphabetize: {
@@ -63,10 +79,8 @@ export default defineConfig([
       ],
     },
     settings: {
-      "import/internal-regex": "^~/",
-      "import/resolver": {
-        typescript: {},
-      },
+      "import-x/internal-regex": "^~/",
+      "import-x/resolver-next": [createTypeScriptImportResolver()],
     },
   },
   prettier,

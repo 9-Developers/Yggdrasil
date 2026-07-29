@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { Link } from "react-router";
-import { DiscordIcon, GitLabIcon, ThemeSwitcher } from "yggdrasil-web-lib";
+import { DiscordIcon, GitLabIcon, ThemeSwitcher } from "yggdrasil-site-lib";
 
 export function Settings(): ReactNode {
   return (

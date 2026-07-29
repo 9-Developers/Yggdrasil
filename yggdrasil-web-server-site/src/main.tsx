@@ -1,4 +1,4 @@
-import "yggdrasil-web-lib/style.css";
+import "yggdrasil-site-lib/style.css";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
