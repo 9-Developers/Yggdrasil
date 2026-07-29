@@ -5,9 +5,9 @@
 [![Release](https://img.shields.io/gitea/v/release/9-Developers/Yggdrasil?gitea_url=https%3A%2F%2Fcodeberg.org)][3]
 [![CI](https://codeberg.org/9-Developers/Yggdrasil/actions/workflows/ci.yml/badge.svg?branch=main)][4]
 
-![Yggdrasil logo](assets/Yggdrasil%20Icon%20-%20512.png)
-
 A suite of [PaperMC][5] server plugins.
+
+<img src="assets/Yggdrasil Wordmark.png" alt="Yggdrasil" width="420">
 
 ## Yggdrasil Data
 
