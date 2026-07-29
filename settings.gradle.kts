@@ -2,12 +2,12 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-rootProject.name = "9craft"
+rootProject.name = "yggdrasil"
 
-include("9craft-chat-api")
-include("9craft-core-api")
-include("9craft-data-api", "9craft-data-plugin")
-include("9craft-economy-api")
-include("9craft-map-api", "9craft-map-plugin")
-include("9craft-permission-api")
-include("9craft-web-server-api", "9craft-web-server-plugin")
+include("yggdrasil-chat-api")
+include("yggdrasil-core-api")
+include("yggdrasil-data-api", "yggdrasil-data-plugin")
+include("yggdrasil-economy-api")
+include("yggdrasil-map-api", "yggdrasil-map-plugin")
+include("yggdrasil-permission-api")
+include("yggdrasil-web-server-api", "yggdrasil-web-server-plugin")

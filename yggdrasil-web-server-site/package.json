@@ -1,0 +1,53 @@
+{
+  "name": "yggdrasil-web-server-site",
+  "private": true,
+  "version": "0.1.0",
+  "author": "Ryan Porterfield <ixirsii@9dev.tech>",
+  "license": "BSD-3-Clause",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "check": "pnpm run lint && pnpm run typecheck",
+    "fix": "pnpm run lint:fix && pnpm run format:write",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72",
+  "dependencies": {
+    "yggdrasil-web-lib": "workspace:*",
+    "better-auth": "1.6.2",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-router": "7.14.0"
+  },
+  "devDependencies": {
+    "@catppuccin/tailwindcss": "1.0.0",
+    "@eslint/js": "10.0.1",
+    "@rolldown/plugin-babel": "0.2.2",
+    "@tailwindcss/vite": "4.2.2",
+    "@types/node": "25.5.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "9.39.4",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-prettier": "5.5.5",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.5.2",
+    "globals": "17.4.0",
+    "prettier": "3.8.1",
+    "prettier-plugin-tailwindcss": "0.7.2",
+    "tailwindcss": "4.2.2",
+    "typescript": "6.0.2",
+    "typescript-eslint": "8.58.0",
+    "vite": "8.0.3"
+  }
+}

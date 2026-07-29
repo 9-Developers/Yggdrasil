@@ -1,4 +1,4 @@
-# Contributing to 9craft
+# Contributing to Yggdrasil
 
 First off, thanks for taking the time to contribute! ❤️
 
@@ -137,7 +137,7 @@ left to be [implemented by someone](#your-first-code-contribution).
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for 9craft,
+This section guides you through submitting an enhancement suggestion for Yggdrasil,
 **including completely new features and minor improvements to existing
 functionality**.
 Following these guidelines will help maintainers and the community to understand
@@ -175,7 +175,7 @@ demonstrate the steps or point out the part which the suggestion is related
 to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on
 macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or
 [this tool](https://github.com/GNOME/byzanz) on Linux.
-- **Explain why this enhancement would be useful** to most 9craft users.
+- **Explain why this enhancement would be useful** to most Yggdrasil users.
 You may also want to point out the other projects that solved it better and
 which could serve as inspiration.
 
@@ -190,7 +190,7 @@ which could serve as inspiration.
 
 ### Commit Messages
 
-9craft uses [Semantic commit messages][1].
+Yggdrasil uses [Semantic commit messages][1].
 
 ## Attribution
 This guide is based on the **contributing.md**.

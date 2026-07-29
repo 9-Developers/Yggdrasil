@@ -1,0 +1,27 @@
+name: Yggdrasil Map
+version: '$version'
+
+main: tech.ninecraft.map.MapPlugin
+description: 'Web-based world map'
+api-version: '26.1.2'
+load: POSTWORLD
+
+authors:
+  - Ryan Porterfield
+website: https://www.yggdrasil.tech
+
+dependencies:
+  bootstrap:
+    Yggdrasil Web Server:
+      load: BEFORE
+      required: true
+      join-classpath: true
+  server:
+    Yggdrasil Data:
+      load: BEFORE
+      required: true
+      join-classpath: true
+
+libraries:
+  - jakarta.ws.rs:jakarta.ws.rs-api:4.0.0
+  - org.jspecify:jspecify:1.0.0

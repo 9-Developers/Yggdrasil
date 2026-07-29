@@ -1,0 +1,6 @@
+packages:
+  - yggdrasil-site-lib
+  - yggdrasil-web-server-site
+
+allowBuilds:
+  unrs-resolver: false

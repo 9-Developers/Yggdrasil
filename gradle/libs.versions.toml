@@ -1,23 +1,32 @@
 [versions]
-axion = "1.21.1"
+# Plugins
+axion = "1.21.2"
+jreleaser = "1.25.0"
+run-paper = "3.0.2"
+# Libraries
+evo-inflector = "2.0"
 jackson = "3.1.1"
 jakarta = "4.0.0"
 jakarta-inject = "2.0.1"
 jakarta-json = "2.1.3"
 jakarta-validations-api = "3.1.1"
 jersey = "4.0.2"
-jreleaser = "1.21.0"
 jspecify = "1.0.0"
 junit = "6.0.1"
 mongo = "5.6.4"
-paper = "1.21.11-R0.1-SNAPSHOT"
+paper = "26.1.2.build.74-stable"
 reactor = "2025.0.4"
-run-paper = "1.1.0"
 slf4j = "2.0.17"
 sqlite = "3.51.3.0"
 
 [libraries]
-axion = { group = "pl.allegro.tech.build", name = "axion-release-plugin", version.ref = "axion" }
+# Plugins
+axion = { group = "pl.allegro.tech.build.axion-release", name = "pl.allegro.tech.build.axion-release.gradle.plugin", version.ref = "axion" }
+jreleaser = { group = "org.jreleaser", name = "org.jreleaser.gradle.plugin", version.ref = "jreleaser" }
+run-paper = { group = "xyz.jpenilla.run-paper", name = "xyz.jpenilla.run-paper.gradle.plugin", version.ref = "run-paper" }
+
+# Libraries
+evo-inflector = { group = "org.atteo", name = "evo-inflector", version.ref = "evo-inflector" }
 jackson-bom = { group = "tools.jackson", name = "jackson-bom", version.ref = "jackson" }
 jackson-core = { group = "tools.jackson.core", name = "jackson-core" }
 jackson-databind = { group = "tools.jackson.core", name = "jackson-databind" }
@@ -30,7 +39,6 @@ jersey-container-grizzly = { group = "org.glassfish.jersey.containers", name = "
 jersey-hk2 = { group = "org.glassfish.jersey.inject", name = "jersey-hk2" }
 jersey-json = { group = "org.glassfish.jersey.media", name = "jersey-media-json-jackson" }
 jersey-server = { group = "org.glassfish.jersey.core", name = "jersey-server" }
-jreleaser = { group = "org.jreleaser", name = "jreleaser-gradle-plugin", version.ref = "jreleaser" }
 jspecify = { group = "org.jspecify", name = "jspecify", version.ref = "jspecify" }
 junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
@@ -41,7 +49,6 @@ mongo-driver = { group = "org.mongodb", name = "mongodb-driver-reactivestreams" 
 paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
 reactor-bom = { group = "io.projectreactor", name = "reactor-bom", version.ref = "reactor" }
 reactor-core = { group = "io.projectreactor", name = "reactor-core" }
-run-paper = { group = "xyz.jpenilla", name = "run-paper", version.ref = "run-paper" }
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 sqlite = { group = "org.xerial", name = "sqlite-jdbc", version.ref = "sqlite" }
 

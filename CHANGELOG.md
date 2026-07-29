@@ -20,7 +20,7 @@ and this project adheres to
 
 ## Chat API – 0.1.0 (2026-04-24)
 
-Created initial 9craft Chat API.
+Created initial Yggdrasil Chat API.
 
 ### Added
 
@@ -28,7 +28,7 @@ Created initial 9craft Chat API.
 
 ## Core API – 0.1.0 (2026-04-24)
 
-Created initial 9craft Core API.
+Created initial Yggdrasil Core API.
 
 ### Added
 
@@ -36,7 +36,7 @@ Created initial 9craft Core API.
 
 ## Data API – 0.1.0 (2026-04-24)
 
-Created initial 9craft Data API.
+Created initial Yggdrasil Data API.
 
 ### Added
 
@@ -45,7 +45,7 @@ Created initial 9craft Data API.
 
 ## Data Plugin – 0.1.0 (2026-04-24)
 
-Created initial 9craft Data plugin.
+Created initial Yggdrasil Data plugin.
 
 ### Added
 
@@ -55,7 +55,7 @@ Created initial 9craft Data plugin.
 
 ## Economy API – 0.1.0 (2026-04-24)
 
-Created initial 9craft Economy API.
+Created initial Yggdrasil Economy API.
 
 ### Added
 
@@ -66,7 +66,7 @@ Created initial 9craft Economy API.
 
 ## Permission API – 0.1.0 (2026-04-24)
 
-Created initial 9craft Permission API.
+Created initial Yggdrasil Permission API.
 
 ### Added
 
@@ -74,7 +74,7 @@ Created initial 9craft Permission API.
 
 ## Site Lib – 0.1.0 (2026-04-24)
 
-Created initial 9craft site library.
+Created initial Yggdrasil site library.
 
 ### Added
 

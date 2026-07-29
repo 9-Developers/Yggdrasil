@@ -23,7 +23,7 @@
   - Autocomplete
 - Permissions
 - Plugin configuration
-- API to allow other plugins to integrate with 9craft Map
+- API to allow other plugins to integrate with Yggdrasil Map
 - Online player locations
 - Structure locations?
 - World guard integration

@@ -1,0 +1,14 @@
+name: Yggdrasil Data
+version: '$version'
+
+main: tech.ninecraft.data.DataPlugin
+description: 'Utility plugin for persisting data to a database'
+api-version: '26.1.2'
+load: STARTUP
+
+authors:
+  - Ryan Porterfield
+website: https://www.yggdrasil.tech
+
+libraries:
+  - org.jspecify:jspecify:1.0.0
