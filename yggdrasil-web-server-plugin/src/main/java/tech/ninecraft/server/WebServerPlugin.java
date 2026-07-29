@@ -142,7 +142,7 @@ public class WebServerPlugin extends JavaPlugin implements Resource, WebServer {
         Data dataPlugin = null;
 
         try {
-            dataPlugin = getPlugin(Data.class);
+            dataPlugin = (Data) getServer().getPluginManager().getPlugin("Yggdrasil Data");
         } catch (ClassCastException | IllegalArgumentException | IllegalStateException _) {
             log.warn("Yggdrasil Data plugin not found");
         }

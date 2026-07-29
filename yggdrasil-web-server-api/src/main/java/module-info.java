@@ -2,6 +2,8 @@
  * Yggdrasil Web Server API.
  */
 module tech.ninecraft.server.api {
+    requires static org.jetbrains.annotations;
+
     requires jakarta.validation;
     requires jakarta.ws.rs;
     requires java.logging;

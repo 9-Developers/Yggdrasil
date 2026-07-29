@@ -7,6 +7,7 @@ version = scmVersion.version
 description = "Utility plugin for hosting a web server"
 
 dependencies {
+    compileOnly(libs.jetbrains.annotations)
     compileOnly(project(":yggdrasil-data-api"))
     compileOnly(project(":yggdrasil-web-server-api"))
     compileOnly(platform(libs.jackson.bom))

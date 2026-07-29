@@ -53,7 +53,8 @@ public class SchemaGenerator {
         final Case nameCase;
 
         if (tableClass.isAnnotationPresent(tech.ninecraft.data.api.Table.class)) {
-            final tech.ninecraft.data.api.Table annotation = tableClass.getAnnotation(tech.ninecraft.data.api.Table.class);
+            final tech.ninecraft.data.api.Table annotation =
+                tableClass.getAnnotation(tech.ninecraft.data.api.Table.class);
 
             if (annotation.value().isEmpty()) {
                 name = tableClass.getName();

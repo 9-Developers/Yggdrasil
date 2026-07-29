@@ -2,6 +2,8 @@
  * Yggdrasil Data plugin.
  */
 module tech.ninecraft.data {
+    requires static org.jetbrains.annotations;
+
     requires java.sql;
     requires org.bukkit;
     requires org.jspecify;

@@ -9,6 +9,7 @@ description = "API for plugins integrating with Yggdrasil Web Server"
 dependencies {
     compileOnly(libs.jakarta)
     compileOnly(libs.jakarta.validations.api)
+    compileOnly(libs.jetbrains.annotations)
     compileOnly(platform(libs.jersey.bom))
     compileOnly(libs.jersey.container.grizzly)
     compileOnly(libs.jersey.hk2)

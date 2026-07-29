@@ -2,6 +2,8 @@
  * Yggdrasil Web Server plugin.
  */
 module tech.ninecraft.server {
+    requires static org.jetbrains.annotations;
+
     requires com.fasterxml.jackson.databind;
     requires jakarta.inject;
     requires jakarta.ws.rs;

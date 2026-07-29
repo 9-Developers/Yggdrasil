@@ -192,7 +192,7 @@ public class ReadRegionFileTask implements Runnable {
             case DoubleData doubleData -> {
                 log.info("Read double {}", doubleData.value());
             }
-            case EndData endData -> {
+            case EndData _ -> {
                 log.info("Read end");
             }
             case FloatData floatData -> {

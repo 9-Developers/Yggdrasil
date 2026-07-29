@@ -7,6 +7,7 @@ version = scmVersion.version
 description = "Paper plugin which provides a web map"
 
 dependencies {
+    compileOnly(libs.jetbrains.annotations)
     compileOnly(project(":yggdrasil-map-api"))
     compileOnly(project(":yggdrasil-web-server-api"))
     compileOnly(libs.bundles.jakarta)

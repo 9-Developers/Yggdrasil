@@ -2,6 +2,9 @@
  * Yggdrasil Map plugin.
  */
 module tech.ninecraft.map {
+    requires static com.google.common;
+    requires static org.jetbrains.annotations;
+
     requires jakarta.inject;
     requires jakarta.ws.rs;
     requires jdk.incubator.vector;

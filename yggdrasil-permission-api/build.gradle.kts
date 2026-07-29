@@ -7,6 +7,7 @@ version = scmVersion.version
 description = "Yggdrasil permission API"
 
 dependencies {
+    compileOnly(libs.jetbrains.annotations)
     compileOnly(libs.paper.api)
 
     implementation(libs.jspecify)
