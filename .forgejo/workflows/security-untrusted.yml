@@ -26,7 +26,7 @@ jobs:
             ${{ forgejo.workspace }}
 
   trivy:
-    name: Trivy
+    name: Trivy Full
     runs-on: node24
     timeout-minutes: 15
     steps:
@@ -46,13 +46,13 @@ jobs:
             ${{ forgejo.workspace }}
 
       - name: Upload report
-        uses: actions/upload-artifact@v4
+        uses: https://data.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e # v4.3.1
         with:
           name: trivy.sarif
           path: trivy.sarif
 
   trivy-blocking:
-    name: Trivy
+    name: Trivy Blocking
     runs-on: node24
     timeout-minutes: 15
     steps:
