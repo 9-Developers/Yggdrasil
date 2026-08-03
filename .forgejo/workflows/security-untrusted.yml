@@ -18,6 +18,7 @@ jobs:
         uses: docker://docker.io/semgrep/semgrep@sha256:65dcd4408adda7c183a6b4550cb1e9b19f7f627a6fbb7e0559bd466bedc44d7b # 1.172.0
         with:
           args: >-
+            semgrep
             scan
             --config auto
             --severity ERROR
@@ -40,15 +41,15 @@ jobs:
           args: >-
             fs
             --scanners license,misconfig,secret,vuln
-            --format json
-            --output trivy.json
+            --format sarif
+            --output trivy.sarif
             ${{ forgejo.workspace }}
 
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
-          name: trivy.json
-          path: trivy.json
+          name: trivy.sarif
+          path: trivy.sarif
 
   trivy-blocking:
     name: Trivy
