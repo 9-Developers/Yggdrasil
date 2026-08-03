@@ -30,6 +30,7 @@ jobs:
 
   web:
     name: Web build
+    needs: web-check
     runs-on: node24
     timeout-minutes: 20
     steps:
@@ -44,8 +45,30 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Check
-        run: pnpm check
-
       - name: Build
         run: pnpm build
+
+  web-check:
+    name: Web check
+    runs-on: freebsd-15.1
+    timeout-minutes: 20
+    steps:
+      - name: Install workflow prerequisites
+        run: |
+          env ASSUME_ALWAYS_YES=yes pkg bootstrap -f
+          pkg install -y git bash node24 npm-node24
+
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          ref: ${{ forgejo.sha }}
+
+      - name: Install pnpm
+        uses: https://github.com/pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check
+        run: pnpm check
