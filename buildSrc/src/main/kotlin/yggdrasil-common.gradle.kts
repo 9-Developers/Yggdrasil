@@ -16,6 +16,10 @@ repositories {
     }
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 checkstyle {
     configFile = rootProject.file("config/checkstyle/checkstyle.xml")
     toolVersion = "13.7.0"

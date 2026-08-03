@@ -6,6 +6,10 @@ repositories {
     gradlePluginPortal()
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 dependencies {
     implementation(libs.axion)
     implementation(libs.jreleaser)
