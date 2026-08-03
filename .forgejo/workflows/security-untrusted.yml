@@ -1,0 +1,71 @@
+name: Security (Untrusted)
+
+on:
+  pull_request:
+
+jobs:
+  semgrep:
+    name: Semgrep
+    runs-on: node24
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Scan source
+        uses: docker://docker.io/semgrep/semgrep@sha256:65dcd4408adda7c183a6b4550cb1e9b19f7f627a6fbb7e0559bd466bedc44d7b # 1.172.0
+        with:
+          args: >-
+            scan
+            --config auto
+            --severity ERROR
+            --error
+            ${{ forgejo.workspace }}
+
+  trivy:
+    name: Trivy
+    runs-on: node24
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Scan repository
+        uses: docker://docker.io/aquasec/trivy@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f # 0.72.0
+        with:
+          args: >-
+            fs
+            --scanners license,misconfig,secret,vuln
+            --format json
+            --output trivy.json
+            ${{ forgejo.workspace }}
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy.json
+          path: trivy.json
+
+  trivy-blocking:
+    name: Trivy
+    runs-on: node24
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Scan repository
+        uses: docker://docker.io/aquasec/trivy@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f # 0.72.0
+        with:
+          args: >-
+            fs
+            --exit-code 1
+            --severity HIGH,CRITICAL
+            --scanners license,misconfig,secret,vuln
+            ${{ forgejo.workspace }}
