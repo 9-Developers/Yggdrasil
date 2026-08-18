@@ -3,7 +3,7 @@
 # This file is expected to be part of source control.
 # To regenerate this file, run: ./gradlew :yggdrasil-web-server-plugin:dependencies --write-locks
 biz.aQute.bnd:biz.aQute.bnd.annotation:7.1.0=compileClasspath
-com.fasterxml.jackson.core:jackson-annotations:2.21=compileClasspath
+com.fasterxml.jackson.core:jackson-annotations:2.22=compileClasspath
 com.fasterxml.jackson.core:jackson-core:2.19.1=compileClasspath
 com.fasterxml.jackson.core:jackson-databind:2.19.1=compileClasspath
 com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:2.19.1=compileClasspath
@@ -120,7 +120,7 @@ org.slf4j:slf4j-api:2.0.17=compileClasspath
 org.slf4j:slf4j-simple:2.0.18=checkstyle
 org.xmlresolver:xmlresolver:5.3.3=checkstyle
 org.yaml:snakeyaml:2.2=compileClasspath
-tools.jackson.core:jackson-core:3.1.1=compileClasspath
-tools.jackson.core:jackson-databind:3.1.1=compileClasspath
-tools.jackson:jackson-bom:3.1.1=compileClasspath
+tools.jackson.core:jackson-core:3.2.2=compileClasspath
+tools.jackson.core:jackson-databind:3.2.2=compileClasspath
+tools.jackson:jackson-bom:3.2.2=compileClasspath
 empty=annotationProcessor,testAnnotationProcessor
