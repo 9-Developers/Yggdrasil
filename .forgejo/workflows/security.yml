@@ -1,7 +1,10 @@
-name: Security (Untrusted)
+name: Security
 
 on:
-  pull_request:
+  push:
+    branches:
+      - main
+  workflow_call:
 
 jobs:
   semgrep:
@@ -13,6 +16,7 @@ jobs:
         uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+          ref: ${{ forgejo.sha }}
 
       - name: Scan source
         uses: docker://docker.io/semgrep/semgrep@sha256:65dcd4408adda7c183a6b4550cb1e9b19f7f627a6fbb7e0559bd466bedc44d7b # 1.172.0
@@ -21,12 +25,57 @@ jobs:
             semgrep
             scan
             --config auto
-            --severity ERROR
+            --sarif
+            --sarif-output=semgrep.sarif
+            --text
             --error
             ${{ forgejo.workspace }}
 
-  trivy:
-    name: Trivy Full
+      - name: Upload report
+        if: always()
+        uses: https://data.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e # v4.3.1
+        with:
+          name: semgrep
+          path: semgrep.sarif
+
+  socket:
+    name: Socket
+    runs-on: node24
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          ref: ${{ forgejo.sha }}
+
+      - name: Scan dependencies
+        run: npx --yes socket@1.1.146 ci --org 9-developers
+        env:
+          SOCKET_SECURITY_API_TOKEN: ${{ secrets.SOCKET_SECURITY_API_KEY }}
+
+  trivy-blocking:
+    name: Trivy (blocking)
+    runs-on: node24
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Scan repository
+        uses: docker://docker.io/aquasec/trivy@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f # 0.72.0
+        with:
+          args: >-
+            fs
+            --exit-code 1
+            --severity HIGH,CRITICAL
+            --scanners license,misconfig,secret,vuln
+            ${{ forgejo.workspace }}
+
+  trivy-report:
+    name: Trivy (report)
     runs-on: node24
     timeout-minutes: 15
     steps:
@@ -48,25 +97,5 @@ jobs:
       - name: Upload report
         uses: https://data.forgejo.org/forgejo/upload-artifact@16871d9e8cfcf27ff31822cac382bbb5450f1e1e # v4.3.1
         with:
-          name: trivy.sarif
+          name: trivy
           path: trivy.sarif
-
-  trivy-blocking:
-    name: Trivy Blocking
-    runs-on: node24
-    timeout-minutes: 15
-    steps:
-      - name: Check out repository
-        uses: https://data.forgejo.org/actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-
-      - name: Scan repository
-        uses: docker://docker.io/aquasec/trivy@sha256:cffe3f5161a47a6823fbd23d985795b3ed72a4c806da4c4df16266c02accdd6f # 0.72.0
-        with:
-          args: >-
-            fs
-            --exit-code 1
-            --severity HIGH,CRITICAL
-            --scanners license,misconfig,secret,vuln
-            ${{ forgejo.workspace }}
